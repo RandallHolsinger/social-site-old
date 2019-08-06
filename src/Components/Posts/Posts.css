@@ -1,0 +1,13 @@
+tr, td, th {
+    border: 1px solid black;
+}
+
+table {
+    padding: 30px;
+    border: 1px thin black;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px black;
+    background-color: white;
+   
+}
+
