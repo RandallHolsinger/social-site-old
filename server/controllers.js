@@ -6,7 +6,7 @@ module.exports = {
     //Auth Controllers
   register: async (req, res) => {
       console.log('hit')
-      const {username, password, email, dob, city, state} = req.body;
+      const {username, password, email, dob, city, state, defaultImage} = req.body;
       const {session} = req;
       const db = req.app.get('db')
       let takenUsername = await db.auth.check_username({username})
@@ -17,7 +17,7 @@ module.exports = {
 
       let salt = bcrypt.genSaltSync(10)
       let hash = bcrypt.hashSync(password, salt)
-      let user = await db.auth.register({username, password: hash, email, dob, city, state})
+      let user = await db.auth.register({username, password: hash, email, dob, city, state, defaultImage})
       user = user[0]
       session.user = user
       res.status(200).send(session.user)
@@ -61,17 +61,20 @@ module.exports = {
 
   getPosts: (req, res) => {
       db = req.app.get('db')
+      console.log('hitting backend')
     
-      db.threads.get_posts().then(threads => {
-          res.status(200).send(threads)
+      db.posts.get_posts().then(posts => {
+          res.status(200).send(posts)
       })
   },
 
   addPost: (req, res) => {
       db = req.app.get('db')
-      const {body} = req.body
-      console.log(req.body)
-      db.threads.add_post([body.topicInput, body.threadInput]).then(() => res.sendStatus(200))
+      const {user_id} = req.session.user
+      console.log(req.session)
+      const {postInput} = req.body
+      
+      db.posts.add_post([user_id, postInput]).then(() => res.sendStatus(200))
   }
 
 

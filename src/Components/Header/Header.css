@@ -4,8 +4,9 @@
 }
 
 header {
-    background-color: grey;
+    background-color: white;
     display: flex;
+    height: 60px;
 }
 
 nav {

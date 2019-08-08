@@ -11,7 +11,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 
 app.use(session({
     secret: SESSION_SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: {
         maxAge: 1000000000
@@ -35,7 +35,7 @@ app.get('/auth/current', ctrl.getUser)
 
 app.post('/auth/logout', ctrl.logout)
 
-//thread endpoints
+//Post endpoints
 
 app.get('/api/getPosts', ctrl.getPosts)
 

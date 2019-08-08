@@ -1,0 +1,35 @@
+.Register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.reg-form {
+    display: flex;
+    flex-direction: column;
+    background-color: #35373b;
+    border: 1px thin black;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px black;
+    padding: 20px;
+    width: 80%;
+}
+
+input {
+    border: 1px thin black;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+button {
+    border : 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100px;
+    background-color: goldenrod;
+
+}
+

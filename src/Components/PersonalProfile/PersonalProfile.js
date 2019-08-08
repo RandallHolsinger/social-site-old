@@ -9,6 +9,11 @@ class PersonalProfile extends Component {
         }
     }
 
+    
+    componentDidMount() {
+      
+    }
+
 
 
     render() {

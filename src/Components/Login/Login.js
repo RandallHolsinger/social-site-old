@@ -18,24 +18,23 @@ class Login extends Component{
        this.handlePassword = this.handlePassword.bind(this)
    }
 
-   componentDidMount() {
-      this.getUser()
-   }
-
-
-   login = async () => {
-     const {username, password} = this.state
-     try {
-         let res = await axios.post('/auth/login', {username, password})
-         this.props.updateUser(res.data)
+  
+    
+    
+    login = async () => {
+        const {username, password} = this.state
+        try {
+            let res = await axios.post('/auth/login', {username, password})
+            this.props.updateUser(res.data)
+         this.props.history.push('/home')
      } catch(err) {
          console.log(err)
      }
    }
 
    getUser = async () => {
-       const {id} = this.props
-       if(!id) {
+       const {user_id} = this.props
+       if(!user_id) {
            try {
                let res = await axios.get('/auth/current')
                this.props.updateUser(res.data)
@@ -43,11 +42,6 @@ class Login extends Component{
                console.log(err)
            }
        }
-   }
-
-   logout = () => {
-       axios.post('/auth/logout')
-       this.props.clearUser()
    }
 
    handleUsername(e) {
@@ -72,12 +66,8 @@ class Login extends Component{
            <div className='Login'>
              <h1>Login</h1>
              
-             {this.props.reduxState.id ? 
-               <div>
-                  <p>Welcome {this.props.reduxState.username}</p>
-                  <button className='logout-btn' onClick={() => this.logout()}>Logout</button>
-              </div>
-              :
+             
+              
              <div>
              <input 
                className='username-input'
@@ -95,7 +85,7 @@ class Login extends Component{
             <button onClick={this.login}>Login</button>
             <button onClick={()=> this.routeRegister()}>Register</button>
             </div>
-            }
+    
             <ParticlesJS />
            </div>
        )
@@ -104,7 +94,7 @@ class Login extends Component{
 
 const mapStateToProps = (reduxState) => {
     return {
-        id: reduxState.id,
+        user_id: reduxState.user_id,
         reduxState
     }
 }

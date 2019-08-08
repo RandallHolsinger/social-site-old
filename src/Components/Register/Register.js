@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import './Register.css';
 import axios from 'axios';
-import ParticlesJS from '../particlesJS'
+import ParticlesJS from '../particlesJS';
 import {connect} from 'react-redux';
 import {updateUser, clearUser} from '../../redux/reducer';
 
@@ -15,21 +16,51 @@ class Register extends Component {
             email: '',
             dob: '',
             city: '',
-            state: ''
+            state: '',
+            defaultImage: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
         }
+    }
+    componentDidMount() {
+        console.log(this.props)
+        this.getUser()
     }
 
     register = async () => {
         try {
-            const {username, password, email, dob, city, state} = this.state
-            let res = await axios.post('/auth/register', {username, password, email, dob, city, state})
+            const {username, password, email, dob, city, state, defaultImage} = this.state
+            let res = await axios.post('/auth/register', {username, password, email, dob, city, state, defaultImage})
             console.log(this.state)
             this.props.updateUser(res.data)
+            this.props.history.push('/home')
         } catch(err) {
             console.log(err)
         }
      }
-     handleUsername = (e) => {
+
+     login = async () => {
+        const {username, password} = this.state
+        try {
+            let res = await axios.post('/auth/login', {username, password})
+            this.props.updateUser(res.data)
+            this.props.history.push('/home')
+        } catch(err) {
+            console.log(err)
+        }
+      }
+     
+     getUser = async () => {
+        const {id} = this.props
+        if(!id) {
+            try {
+                let res = await axios.get('/auth/current')
+                this.props.updateUser(res.data)
+            } catch(err) {
+                console.log(err)
+            }
+        }
+    }
+     
+    handleUsername = (e) => {
          this.setState({
              username: e.target.value
          })
@@ -97,12 +128,6 @@ class Register extends Component {
                   placeholder='email'
                />
                <input
-                 className='dob-reg'
-                 value={this.state.dob}
-                 onChange={this.handleDob}
-                 placeholder='mm/dd/yyyy'
-               />
-               <input
                  className='city-reg'
                  value={this.state.city}
                  onChange={this.handleCity}
@@ -114,6 +139,12 @@ class Register extends Component {
                  onChange={this.handleState}
                  placeholder='state'
                />
+               <input
+                 className='dob-reg'
+                 value={this.state.dob}
+                 onChange={this.handleDob}
+                 placeholder='mm/dd/yyyy'
+               />
               <button className='submit-reg' onClick={() => this.register()}>Submit</button>
              </div>
              <ParticlesJS />
@@ -124,7 +155,7 @@ class Register extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        id: reduxState.id,
+        user_id: reduxState.user_id,
         reduxState
     }
 }
