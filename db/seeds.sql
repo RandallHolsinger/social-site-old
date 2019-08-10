@@ -19,5 +19,14 @@ create table posts (
   likes integer
 )
 
+create table comments (
+  comment_id serial primary key not null,
+  user_id integer,
+  post_id integer
+  comment text,
+  likes integer,
+  date TIMESTAMP
+)
+
 insert into posts (user_id, post, image_id, likes)
 values ($1, $2, $3, 0)

@@ -4,6 +4,7 @@ import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import PersonalProfile from './Components/PersonalProfile/PersonalProfile';
 import Home from './Components/Home/Home';
+import Post from './Components/Post/Post'
 
 export default (
     <Switch>
@@ -11,5 +12,6 @@ export default (
       <Route path='/register' component={Register}/>
       <Route path='/home' component={Home}/>
       <Route path='/profile/personal/:id' component={PersonalProfile}/>
+      <Route path='/post/:post_id' component={Post}/>
     </Switch>
 )

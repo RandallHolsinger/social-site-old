@@ -11,10 +11,10 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 
 app.use(session({
     secret: SESSION_SECRET,
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge: 1000000000
+        maxAge: 10000000000
     }
 }))
 
@@ -40,3 +40,11 @@ app.post('/auth/logout', ctrl.logout)
 app.get('/api/getPosts', ctrl.getPosts)
 
 app.post('/api/addPost', ctrl.addPost)
+
+app.get('/api/post/:post_id', ctrl.getPost)
+
+//commment endpoints
+
+app.get('/api/comments/:post_id', ctrl.getComments)
+
+app.post('/api/comment/:post_id', ctrl.addComment)
