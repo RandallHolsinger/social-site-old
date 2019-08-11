@@ -40,13 +40,17 @@ class Header extends Component{
         return(
             <div className='header-wrapper'>
               <header>
+                      <Link to='/'>
                       <h1 className="logo">LOGO</h1>
+                      </Link>
                   <nav>
                       <ul>
-                          <li>Home</li>
-                          <li>Profiles</li>
+                         
+                          <Link to='/profiles'>
+                            <li>Profiles</li>
+                          </Link>
                           <Link to='/user/profile'>
-                          <li>My profile</li>
+                            <li>My profile</li>
                           </Link>
                       </ul>
                   </nav>

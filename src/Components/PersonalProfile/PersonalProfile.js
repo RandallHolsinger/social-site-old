@@ -42,7 +42,7 @@ class PersonalProfile extends Component {
         let mappedPosts = this.state.posts.map(posts => {
             return (
                 <div key={posts.post_id} style={{border: '1px solid white', marginTop: '30px'}}>
-                    <img src={user.profile_img} alt='profile picture' style={{width: '40px', borderRadius: '100%'}}/>
+                    <img src={user.profile_img} alt='profile' style={{width: '40px', borderRadius: '100%'}}/>
                     <p>{user.username}</p>
                     <p>{posts.post}</p>
                 </div>
@@ -51,7 +51,7 @@ class PersonalProfile extends Component {
         return (
             <div className='PersonalProfile'>
              <Header />
-               <img src={user.profile_img} alt='profile pic' style={{width: '100px', borderRadius: '100%'}}/>
+               <img src={user.profile_img} alt='profile' style={{width: '100px', borderRadius: '100%'}}/>
                <p>{user.username}</p>
                <p></p>
                {mappedPosts}

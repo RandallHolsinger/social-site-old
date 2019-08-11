@@ -7,14 +7,15 @@ create table users(
   city varchar(50),
   state varchar(50),
   profile_img text,
-  about_me text
+  about_me text,
+  date TIMESTAMP
 )
 
 create table posts (
   post_id serial primary key not null,
   user_id integer,
   post text,
-  date time,
+  date TIMESTAMP,
   image_id integer,
   likes integer
 )

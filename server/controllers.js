@@ -90,7 +90,6 @@ module.exports = {
 
      db.posts.get_user_posts([user_id]).then(posts => {
          res.status(200).send(posts)
-         console.log('hit')
      })
   },
 
@@ -110,6 +109,15 @@ module.exports = {
       const {post_id} = req.params
 
       db.comments.add_comment([user_id, post_id, commentInput]).then(() => res.sendStatus(200))
+  },
+
+  //profile endpoints
+  getProfiles: (req, res) => {
+     db = req.app.get('db')
+
+     db.profile.get_profiles().then(profiles => {
+         res.status(200).send(profiles)
+     })
   },
 
   getUserProfile: (req, res) => {

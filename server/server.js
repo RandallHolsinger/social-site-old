@@ -53,4 +53,6 @@ app.post('/api/comment/:post_id', ctrl.addComment)
 
 //profile endpoints
 
+app.get('/api/profiles', ctrl.getProfiles)
+
 app.get('/api/user/profile', ctrl.getUserProfile)
