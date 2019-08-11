@@ -10,7 +10,7 @@ class Home extends Component {
 
         this.state = {
             posts: [],
-            postInput: '',
+            postInput: ''
         }
 
         this.handlePost = this.handlePost.bind(this)
@@ -24,6 +24,7 @@ class Home extends Component {
             this.setState({
                 posts: res.data
             })
+            console.log(res)
         })
     }
     

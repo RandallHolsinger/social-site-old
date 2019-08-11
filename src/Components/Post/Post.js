@@ -27,13 +27,10 @@ class Post extends Component {
     }
 
     getComments = () => {
-        // console.log(this.state.post)
-        // const {post_id} = this.state.post
         axios.get(`/api/comments/${this.props.match.params.post_id}`).then(res => {
             this.setState({
                 comments: res.data
             })
-            console.log(res.data)
         })
     }
 

@@ -84,10 +84,19 @@ module.exports = {
       db.posts.add_post([user_id, postInput]).then(() => res.sendStatus(200))
   },
 
+  getUserPosts: (req, res) => {
+     db = req.app.get('db')
+     const {user_id} = req.session.user
+
+     db.posts.get_user_posts([user_id]).then(posts => {
+         res.status(200).send(posts)
+         console.log('hit')
+     })
+  },
+
   getComments: (req, res) => {
       db = req.app.get('db')
       const {post_id} = req.params
-      console.log('hitting', req.params)
 
       db.comments.get_comments([post_id]).then(comments => {
           res.status(200).send(comments)
@@ -101,5 +110,14 @@ module.exports = {
       const {post_id} = req.params
 
       db.comments.add_comment([user_id, post_id, commentInput]).then(() => res.sendStatus(200))
+  },
+
+  getUserProfile: (req, res) => {
+      db = req.app.get('db')
+      const {user_id} = req.session.user
+
+      db.profile.get_user_profile([user_id]).then(profile => {
+          res.status(200).send(profile)
+      })
   }
 }

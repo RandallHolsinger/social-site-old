@@ -45,6 +45,9 @@ class Header extends Component{
                       <ul>
                           <li>Home</li>
                           <li>Profiles</li>
+                          <Link to='/user/profile'>
+                          <li>My profile</li>
+                          </Link>
                       </ul>
                   </nav>
                   <div className='header-login'>
