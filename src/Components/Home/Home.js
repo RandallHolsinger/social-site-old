@@ -45,7 +45,7 @@ class Home extends Component {
     render() {
        let mappedPosts = this.state.posts.map(post => {
            return (
-               <div key={post.post_id} style={{border:'1px solid black', backgroundColor:'white', width:'50%    '}}>
+               <div key={post.post_id} style={{border:'1px solid black', backgroundColor:'white', width:'50%'}}>
                <Link to={`/post/${post.post_id}`}>
                  <img style={{width:'30px', height:'30px', borderRadius:'100%'}} src={post.profile_img} alt='profile img'/>
                  <p>{post.username}</p>

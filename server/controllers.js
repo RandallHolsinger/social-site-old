@@ -111,7 +111,7 @@ module.exports = {
       db.comments.add_comment([user_id, post_id, commentInput]).then(() => res.sendStatus(200))
   },
 
-  //profile endpoints
+  //profile contollers
   getProfiles: (req, res) => {
      db = req.app.get('db')
 
@@ -127,5 +127,55 @@ module.exports = {
       db.profile.get_user_profile([user_id]).then(profile => {
           res.status(200).send(profile)
       })
+  },
+
+  getProfile: (req, res) => {
+      db = req.app.get('db')
+      const {user_id} = req.params
+
+      db.profile.get_profile([user_id]).then(profile => {
+          res.status(200).send(profile)
+      })
+  },
+
+  updateAbout: (req, res) => {
+      db = req.app.get('db')
+      const {user_id} = req.session.user
+      const {aboutInput} = req.body
+
+      db.profile.update_about([aboutInput, user_id]).then(() => res.sendStatus(200))
+  },
+  
+  //friend controllers
+  getFriends: (req, res) => {
+      db = req.app.get('db')
+
+      db.friends.get_friends().then(friends => {
+          res.status(200).send(friends)
+      })
+  },
+
+  addFriend: (req, res) => {
+      db = req.app.get('db')
+      const {user_id} = req.session.user
+      const{user_id2} = req.params
+
+      db.friends.add_friend([user_id, user_id2]).then(() => res.sendStatus(200))
+  },
+
+  getPendingFriends: (req, res) => {
+      db = req.app.get('db')
+      const {user_id} = req.session.user
+
+      db.friends.get_pending([user_id]).then(pending => {
+          res.status(200).send(pending)
+      })
+  },
+
+  confirmFriend: (req, res) => {
+      db = req.app.get('db')
+      const {user_id2} = req.session.user
+
+      db.friends.confirm_friend([user_id2]).then(() => res.sendStatus(200))
   }
 }

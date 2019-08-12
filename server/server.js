@@ -56,3 +56,18 @@ app.post('/api/comment/:post_id', ctrl.addComment)
 app.get('/api/profiles', ctrl.getProfiles)
 
 app.get('/api/user/profile', ctrl.getUserProfile)
+
+app.get('/profile/view/:user_id', ctrl.getProfile)
+
+app.put('/api/user/about', ctrl.updateAbout)
+
+//friend endpoints
+
+app.get('/api/friends', ctrl.getFriends)
+ 
+app.post('/friends/request/:id', ctrl.addFriend)
+
+app.get('/friends/pending', ctrl.getPendingFriends)
+
+app.put('/api/friends/confirmed', ctrl.confirmFriend)
+
