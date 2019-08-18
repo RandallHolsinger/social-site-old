@@ -49,7 +49,7 @@ app.get('/api/user/posts', ctrl.getUserPosts)
 
 app.get('/api/comments/:post_id', ctrl.getComments)
 
-app.post('/api/comment/:post_id', ctrl.addComment)
+app.post('/api/comment', ctrl.addComment)
 
 //profile endpoints
 

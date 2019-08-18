@@ -1,3 +1,12 @@
+
+.logout {
+  display: flex;
+}
+
+.logout p {
+  margin-right: 10px;
+}
+
 .header-wrapper {
   display: block;
   overflow: hidden;

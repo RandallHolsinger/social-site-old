@@ -10,6 +10,7 @@ class Header extends Component{
         super(props)
 
         this.state = {
+            showMessages: false,
             toggleNav: false
         }
     }
@@ -33,37 +34,67 @@ class Header extends Component{
     logout = () => {
         axios.post('/auth/logout')
         this.props.clearUser()
-   
+    }
+
+    showMessages() {
+        this.setState({
+            showMessages: !this.state.showMessages
+        })
+    }
+
+    handlePath = (path) => {
+        this.props.history.push(path)
     }
 
     render(){
         return(
             <div className='header-wrapper'>
-              <header>
-                      <Link to='/'>
-                      <h1 className="logo">LOGO</h1>
-                      </Link>
-                  <nav>
-                      <ul>
-                         
-                          <Link to='/profiles'>
-                            <li>Profiles</li>
-                          </Link>
-                          <Link to='/user/profile'>
-                            <li>My profile</li>
-                          </Link>
-                      </ul>
-                  </nav>
-                  <div className='header-login'>
-                  {this.props.reduxState.user_id ? 
-               <div>
-                  <p>Welcome {this.props.reduxState.username}</p>
-                  <Link to={'/'}>
-                   <button className='logout-btn' onClick={() => this.logout()}>Logout</button>
-                   </Link>
+              <nav className="navbar" role="navigation" aria-label="main navigation">
+  <div className="navbar-brand">
+    <Link to='/home' className="navbar-item" href="https://bulma.io">
+    
+      <img src="https://bulma.io/images/bulma-logo.png" alt='logo' width="112" height="28"/>
+    </Link>
+    
+
+    <a href='#/'role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" className="navbar-menu">
+    <div className="navbar-start">
+    <Link to='/user/profile' className="navbar-item">
+        My Profile
+    </Link>
+
+      <Link to='/profiles'className="navbar-item">
+        Profiles
+      </Link>
+
+     
+    </div>
+
+    <div className="navbar-end">
+      <div className="navbar-item">
+        <div className="buttons">
+          <div></div>
+          {this.props.reduxState.user_id ? 
+               <div className='logout'>
+                  <p>Welcome, {this.props.reduxState.username}!</p>
+          <Link to='/'>
+          <button className='logout-btn' onClick={() => this.logout()}>Logout</button>
+          </Link>
+                  
               </div> : null}
-                  </div>
-              </header>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+                 
             </div>
         )
     }

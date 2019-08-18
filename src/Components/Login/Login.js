@@ -1,107 +1,128 @@
-import React, {Component} from 'react';
-import './Login.css';
-import axios from 'axios';
-import {connect} from 'react-redux';
-import {updateUser, clearUser} from '../../redux/reducer';
-import ParticlesJS from '../particlesJS'
+import React, { Component } from "react";
+import "./Login.css";
+import axios from "axios";
+import { connect } from "react-redux";
+import { updateUser, clearUser } from "../../redux/reducer";
 
-class Login extends Component{
-   constructor(props){
-       super(props)
+import "react-bulma-components/dist/react-bulma-components.min.css";
 
-       this.state = {
-           username: '',
-           password: '',
-       }
+class Login extends Component {
+  constructor(props) {
+    super(props);
 
-       this.handleUsername = this.handleUsername.bind(this)
-       this.handlePassword = this.handlePassword.bind(this)
-   }
+    this.state = {
+      username: "",
+      password: ""
+    };
 
-  
-    
-    
-    login = async () => {
-        const {username, password} = this.state
-        try {
-            let res = await axios.post('/auth/login', {username, password})
-            this.props.updateUser(res.data)
-         this.props.history.push('/home')
-     } catch(err) {
-         console.log(err)
-     }
-   }
+    this.handleUsername = this.handleUsername.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+  }
 
-   getUser = async () => {
-       const {user_id} = this.props
-       if(!user_id) {
-           try {
-               let res = await axios.get('/auth/current')
-               this.props.updateUser(res.data)
-           } catch(err) {
-               console.log(err)
-           }
-       }
-   }
-
-   handleUsername(e) {
-       this.setState({
-           username: e.target.value
-       })
-   }
-
-   handlePassword(e) {
-     this.setState({
-         password: e.target.value
-     })
-   }
-
-   routeRegister = () => {
-       let path = '/register'
-       this.props.history.push(path)
-   }
-
-   render() {
-       return (
-           <div className='Login'>
-             <h1>Login</h1>
-             
-             
-              
-             <div>
-             <input 
-               className='username-input'
-               value={this.state.username}
-               onChange={this.handleUsername}
-               placeholder='username'
-            />
-             <input 
-               className='password-input'
-               value={this.state.password}
-               onChange={this.handlePassword}
-               placeholder='password'
-               type='password'
-            />
-            <button onClick={this.login}>Login</button>
-            <button onClick={()=> this.routeRegister()}>Register</button>
-            </div>
-    
-            <ParticlesJS />
-           </div>
-       )
-   }
-}
-
-const mapStateToProps = (reduxState) => {
-    return {
-        user_id: reduxState.user_id,
-        reduxState
+  login = async () => {
+    const { username, password } = this.state;
+    try {
+      let res = await axios.post("/auth/login", { username, password });
+      this.props.updateUser(res.data);
+      this.props.history.push("/home");
+    } catch (err) {
+      console.log(err);
     }
+  };
+
+  getUser = async () => {
+    const { user_id } = this.props;
+    if (!user_id) {
+      try {
+        let res = await axios.get("/auth/current");
+        this.props.updateUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  handleUsername(e) {
+    this.setState({
+      username: e.target.value
+    });
+  }
+
+  handlePassword(e) {
+    this.setState({
+      password: e.target.value
+    });
+  }
+
+  routeRegister = () => {
+    this.props.history.push("/register");
+  };
+
+  render() {
+    return (
+      <div className="Login">
+        <div className='login-form'>
+        <div className="field">
+          <label className="label has-text-white">Username</label>
+          <div className="control has-icons-left has-icons-right">
+            <input
+              className="input is-success"
+              type="text"
+              value={this.state.username}
+              onChange={this.handleUsername}
+              placeholder="username"
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-user" />
+            </span>
+            <span className="icon is-small is-right">
+              <i className="fas fa-check" />
+            </span>
+          </div>
+          <p className="help is-success">This username is available</p>
+        </div>
+
+        <div className="field">
+          <label className="label">Password</label>
+          <div className="control has-icons-left has-icons-right">
+            <input
+              className="input is-danger"
+              type="password"
+              placeholder="password"
+              value={this.state.password}
+              onChange={this.handlePassword}
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-envelope" />
+            </span>
+            <span className="icon is-small is-right">
+              <i className="fas fa-exclamation-triangle"></i>
+            </span>
+          </div>
+          <p className="help is-danger">This email is invalid</p>
+        </div>
+        <button onClick={this.login}>Login</button>
+        <button onClick={() => this.routeRegister()}>Register</button>
+
+        </div>
+      </div>
+    );
+  }
 }
+
+const mapStateToProps = reduxState => {
+  return {
+    user_id: reduxState.user_id,
+    reduxState
+  };
+};
 
 const mapDispatchToProps = {
-    updateUser,
-    clearUser
-}
+  updateUser,
+  clearUser
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

@@ -3,11 +3,8 @@
   padding: 0px;
 }
 
-body {
-    background: rgb(5,28,4);
-    background: linear-gradient(17deg, rgba(5,28,4,1) 0%, rgba(37,87,33,1) 37%, rgba(1,20,3,1) 100%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+body{
+    /* background-color: #18b858; */
     height: 100%;
-   
+    width: 100%;
 }

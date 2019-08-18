@@ -12,7 +12,7 @@
     "lodash": "^4.17.15",
     "massive": "^5.11.2",
     "react": "^16.8.6",
-    "react-bootstrap": "^1.0.0-beta.10",
+    "react-bulma-components": "^2.3.0",
     "react-dom": "^16.8.6",
     "react-particles-js": "^2.7.0",
     "react-redux": "^7.1.0",

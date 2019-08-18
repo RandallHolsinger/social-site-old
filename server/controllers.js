@@ -95,7 +95,7 @@ module.exports = {
 
   getComments: (req, res) => {
       db = req.app.get('db')
-      const {post_id} = req.params
+      const {post_id} =  req.params
 
       db.comments.get_comments([post_id]).then(comments => {
           res.status(200).send(comments)
@@ -105,8 +105,7 @@ module.exports = {
   addComment: (req, res) => {
       db = req.app.get('db')
       const {user_id} = req.session.user
-      const {commentInput} = req.body
-      const {post_id} = req.params
+      const {post_id, commentInput} = req.body
 
       db.comments.add_comment([user_id, post_id, commentInput]).then(() => res.sendStatus(200))
   },

@@ -1,0 +1,17 @@
+.Login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+   
+}
+.login-form {
+   width: 50%;
+   border: 1px solid black;
+   padding: 20px;
+   background-color: #fff;
+   border: 1px thin black;
+   border-radius: 5px;
+   box-shadow: 2px 2px 2px black;
+}

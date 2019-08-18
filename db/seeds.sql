@@ -36,5 +36,13 @@ create table friends (
   confirmed integer
 )
 
+create table messages(
+  message_id serial primary key not null,
+  user_id integer,
+  user_id2 integer,
+  message text,
+  date TIMESTAMP
+)
+
 insert into posts (user_id, post, image_id, likes)
 values ($1, $2, $3, 0)
