@@ -63,10 +63,10 @@ class Login extends Component {
       <div className="Login">
         <div className='login-form'>
         <div className="field">
-          <label className="label has-text-white">Username</label>
+          <label className="label">Username</label>
           <div className="control has-icons-left has-icons-right">
             <input
-              className="input is-success"
+              className="input"
               type="text"
               value={this.state.username}
               onChange={this.handleUsername}
@@ -79,27 +79,25 @@ class Login extends Component {
               <i className="fas fa-check" />
             </span>
           </div>
-          <p className="help is-success">This username is available</p>
         </div>
 
         <div className="field">
           <label className="label">Password</label>
           <div className="control has-icons-left has-icons-right">
             <input
-              className="input is-danger"
+              className="input"
               type="password"
               placeholder="password"
               value={this.state.password}
               onChange={this.handlePassword}
             />
             <span className="icon is-small is-left">
-              <i className="fas fa-envelope" />
+            <i className="fas fa-lock"></i>
             </span>
             <span className="icon is-small is-right">
               <i className="fas fa-exclamation-triangle"></i>
             </span>
           </div>
-          <p className="help is-danger">This email is invalid</p>
         </div>
         <button onClick={this.login}>Login</button>
         <button onClick={() => this.routeRegister()}>Register</button>

@@ -27,7 +27,7 @@ class Register extends Component {
 
     register = async () => {
         const {validUsername, validPassword, validConPassword, validEmail} = this.state
-        if(validUsername, validPassword, validConPassword, validEmail) {
+        if(validUsername && validPassword && validConPassword && validEmail) {
         try {
             const {username, password, email, defaultImage} = this.state
             let res = await axios.post('/auth/register', {username, password, email, defaultImage})
