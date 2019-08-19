@@ -7,6 +7,7 @@ import Home from './Components/Home/Home';
 import Post from './Components/Post/Post';
 import Profiles from './Components/Profiles/Profiles';
 import ProfileView from './Components/ProfileView/ProfileView';
+import Messages from './Components/Messages/Messages';
 
 export default (
     <Switch>
@@ -17,5 +18,6 @@ export default (
       <Route path='/profiles' component={Profiles}/>
       <Route path='/user/profile' component={PersonalProfile}/>
       <Route path='/post/:post_id' component={Post}/>
+      <Route path='/user/messages' component={Messages}/>
     </Switch>
 )

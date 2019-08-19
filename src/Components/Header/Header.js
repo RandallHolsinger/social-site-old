@@ -70,11 +70,14 @@ class Header extends Component{
         My Profile
     </Link>
 
-      <Link to='/profiles'className="navbar-item">
-        Profiles
-      </Link>
+    <Link to='/profiles' className="navbar-item">
+      Profiles
+    </Link>
+    <Link to='/user/messages' className='navbar-item' >
+     Messages
+    </Link>
 
-     
+    
     </div>
 
     <div className="navbar-end">

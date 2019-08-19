@@ -5,7 +5,7 @@ module.exports = {
 
     //Auth Controllers
   register: async (req, res) => {
-      const {username, password, email, dob, city, state, defaultImage} = req.body;
+      const {username, password, email, defaultImage} = req.body;
       const {session} = req;
       const db = req.app.get('db')
       let takenUsername = await db.auth.check_username({username})
@@ -16,7 +16,7 @@ module.exports = {
 
       let salt = bcrypt.genSaltSync(10)
       let hash = bcrypt.hashSync(password, salt)
-      let user = await db.auth.register({username, password: hash, email, dob, city, state, defaultImage})
+      let user = await db.auth.register({username, password: hash, email, defaultImage})
       user = user[0]
       session.user = user
       res.status(200).send(session.user)

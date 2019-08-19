@@ -1,3 +1,3 @@
-insert into users(username, password, email, dob, city, state, profile_img)
-values (${username}, ${password}, ${email}, ${dob}, ${city}, ${state}, ${defaultImage})
-returning user_id, username, email, dob, city, state, profile_img
+insert into users(username, password, email, profile_img)
+values (${username}, ${password}, ${email}, ${defaultImage})
+returning user_id, username, email, profile_img
