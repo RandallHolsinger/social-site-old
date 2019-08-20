@@ -96,8 +96,9 @@ class PersonalProfile extends Component {
 
         let friendRequests = this.state.pendingFriends.map(friend => {
                 return (
-                    <div key={friend.friend_id}>
-                        <p>friend Request</p>
+                    <div key={friend.friend_id} className='friend-request-wrapper'>
+                        <p>friend Requests</p>
+                         
                         <button onClick={() => this.confirmRequest}>Confirm</button>
                     </div>
                 )
@@ -113,7 +114,7 @@ class PersonalProfile extends Component {
 
         let mappedPosts = this.state.posts.map(posts => {
             return (
-                <div key={posts.post_id} style={{border: '1px solid white', marginTop: '30px'}}>
+                <div key={posts.post_id} className='personal-posts-wrapper'>
                     <img src={user.profile_img} alt='profile' style={{width: '40px', borderRadius: '100%'}}/>
                     <p>{user.username}</p>
                     <p>{posts.post}</p>
@@ -123,9 +124,11 @@ class PersonalProfile extends Component {
         return (
             <div className='PersonalProfile'>
              <Header />
+             <h1 style={{color:'white'}}>Personal User</h1>
+             <div className='personal-user-wrapper'>
                <img src={user.profile_img} alt='profile' style={{width: '100px', borderRadius: '100%'}}/>
                <p>{user.username}</p>
-               <p>About Me</p>
+               <p>About Me:</p>
                <p>{user.about_me}</p>
                {this.state.showAbout ? <div>
                <input
@@ -140,7 +143,9 @@ class PersonalProfile extends Component {
                <button onClick={() => this.showAbout()}>Edit</button>
                </div>
                }
+               </div>
                <p></p>
+               <h1 style={{color:'white'}}>Personal Posts</h1>
                {mappedPosts}
                {mappedFriends}
                {friendRequests}

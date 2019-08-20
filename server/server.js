@@ -65,9 +65,9 @@ app.put('/api/user/about', ctrl.updateAbout)
 
 app.get('/api/friends', ctrl.getFriends)
  
-app.post('/friends/request/:id', ctrl.addFriend)
+app.post('/api/friends/request/:id', ctrl.addFriend)
 
-app.get('/friends/pending', ctrl.getPendingFriends)
+app.get('/api/friends/pending', ctrl.getPendingFriends)
 
 app.put('/api/friends/confirmed', ctrl.confirmFriend)
 

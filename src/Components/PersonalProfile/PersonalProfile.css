@@ -1,0 +1,19 @@
+.PersonalProfile {
+
+}
+.personal-user-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    width: 200px;
+}
+.personal-posts-wrapper {
+    background-color: #fff;
+    border: 3px solid springgreen;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 20px;
+    width: 50%;
+}

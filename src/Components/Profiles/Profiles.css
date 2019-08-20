@@ -1,0 +1,14 @@
+
+.profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid springgreen;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+    width: 225px;
+    height: 200px;
+    background-color: #fff;
+}
