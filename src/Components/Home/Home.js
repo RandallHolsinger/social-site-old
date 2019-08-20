@@ -35,7 +35,6 @@ class Home extends Component {
             this.setState({
                 posts: res.data
             })
-            console.log(res)
         })
     }
     

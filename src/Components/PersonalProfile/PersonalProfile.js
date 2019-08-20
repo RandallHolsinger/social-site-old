@@ -56,11 +56,12 @@ class PersonalProfile extends Component {
             this.setState({
                 pendingFriends: res.data
             })
+            console.log(res)
         })
     }
 
-    confirmRequest = () => {
-        axios.put(`/api/friends/confirmed`).then(() => {
+    confirmRequest = (id) => {
+        axios.put(`/api/friends/confirmed/${id}`).then(() => {
             alert('friend request accepted')
         })
         this.getUserFriendRequests()
@@ -97,9 +98,9 @@ class PersonalProfile extends Component {
         let friendRequests = this.state.pendingFriends.map(friend => {
                 return (
                     <div key={friend.friend_id} className='friend-request-wrapper'>
-                        <p>friend Requests</p>
-                         
-                        <button onClick={() => this.confirmRequest}>Confirm</button>
+                        <img src={friend.profile_img} alt='profile' style={{width:'30px'}}/>
+                         <p>{friend.username}</p>
+                        <button onClick={() => this.confirmRequest(friend.user_id)}>Confirm</button>
                     </div>
                 )
         })
@@ -107,7 +108,8 @@ class PersonalProfile extends Component {
         let mappedFriends =  this.state.friends.map(friend => {
             return (
                 <div key={friend.friend_id}>
-                   <p>friends</p>
+                  <img src={friend.profile_img} alt='profile' style={{width:'30px'}}/>
+                  <p>{friend.username}</p>
                 </div>
             )
         })
@@ -147,8 +149,10 @@ class PersonalProfile extends Component {
                <p></p>
                <h1 style={{color:'white'}}>Personal Posts</h1>
                {mappedPosts}
-               {mappedFriends}
+               <h1 style={{color:'white'}}>Friend Requests</h1>
                {friendRequests}
+               <h1 style={{color:'white'}}>Friends</h1>
+               {mappedFriends}
             </div>
         )
     }

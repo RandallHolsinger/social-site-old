@@ -148,8 +148,9 @@ module.exports = {
   //friend controllers
   getFriends: (req, res) => {
       db = req.app.get('db')
+      const {user_id} = req.session.user
 
-      db.friends.get_friends().then(friends => {
+      db.friends.get_friends([user_id]).then(friends => {
           res.status(200).send(friends)
       })
   },
@@ -157,24 +158,27 @@ module.exports = {
   addFriend: (req, res) => {
       db = req.app.get('db')
       const {user_id} = req.session.user
-      const{user_id2} = req.params
+      const {id} = req.params
 
-      db.friends.add_friend([user_id, user_id2]).then(() => res.sendStatus(200))
+      db.friends.add_friend([user_id, id]).then(() => res.sendStatus(200))
   },
 
   getPendingFriends: (req, res) => {
       db = req.app.get('db')
       const {user_id} = req.session.user
-
+     
       db.friends.get_pending([user_id]).then(pending => {
           res.status(200).send(pending)
       })
+      
   },
 
   confirmFriend: (req, res) => {
       db = req.app.get('db')
-      const {user_id2} = req.session.user
-
-      db.friends.confirm_friend([user_id2]).then(() => res.sendStatus(200))
+      const {user_id} = req.session.user
+      const {id} = req.params
+     
+      console.log('22222', req.params)
+      db.friends.confirm_friend([user_id, id]).then(() => res.sendStatus(200))
   }
 }

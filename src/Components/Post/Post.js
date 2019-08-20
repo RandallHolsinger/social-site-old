@@ -10,7 +10,7 @@ class Post extends Component {
             comments: [],
             commentInput: ''
         }
-       this.handleComment = this.handleComment.bind(this);
+
     }
 
     componentDidMount() {
