@@ -16,7 +16,7 @@ class Home extends Component {
             comments: [],
             postInput: '',
             commentInput: '',
-            post_id: 0,
+            postId: 0,
             showComments: false
         }
 
@@ -28,7 +28,6 @@ class Home extends Component {
 
     componentDidMount() {
         this.getPosts()
-        this.getComments()
     }
     getPosts = () => {
         axios.get(`/api/getPosts`).then(res => {
@@ -44,8 +43,8 @@ class Home extends Component {
         this.getPosts()
     }
 
-    getComments = () => {
-        const {post_id} = this.state
+    getComments = (post_id) => {
+        console.log(post_id)
         axios.get(`/api/comments/${post_id}`).then(res => {
             this.setState({
                 comments: res.data
@@ -72,26 +71,43 @@ class Home extends Component {
         })
     }
 
-    togglePostId(post_id){
-        this.setState({
-            post_id: post_id
-        })
-        console.log(this.state)
-    }
-
-    toggleComment() {
+    toggleComment(post_id) {
+        console.log(post_id)
         this.setState({
             showComments: !this.state.showComments
         })
-        this.getComments()
+        this.getComments(post_id)
     }
     
     
     render() {
+        let mappedComments = this.state.comments.map(comment => {
+            return (
+               <article className="media" key={comment.comment_id}>
+               <figure className="media-left">
+                 <p className="image is-48x48">
+                   <img src={comment.profile_img} alt='profile'/>
+                 </p>
+               </figure>
+         
+               <div className="media-content">
+                 <div className="content">
+                   <p>
+                     <strong>{comment.username}</strong>
+                     <br/>
+                     {comment.comment}
+                     <br/>
+                     {/* <small><a>Like</a> · <a>Reply</a> · 2 hrs</small> */}
+                   </p>
+                 </div>
+              </div>
+              </article> 
+            )
+       })
         
        let mappedPosts = this.state.posts.map(post => {
            return (
-               <div key={post.post_id} onClick={() => this.togglePostId(post.post_id)} className='home-posts' >
+               <div key={post.post_id} className='home-posts' >
                <article className="media">
   <figure className="media-left">
     <p className="image is-64x64">
@@ -108,57 +124,30 @@ class Home extends Component {
     </div>
     <nav className="level is-mobile">
       <div className="level-left">
-        <button onClick={() => this.toggleComment()}className="level-item">
+        <button onClick={() => this.toggleComment(post.post_id)}className="level-item">
           <span className="icon is-small"><i className="fas fa-reply"></i></span>
         </button>
-      
       </div>
     </nav>
   </div>
-</article>
-{this.state.showComments ? <div>
-<input
-    className='comment-input'
-    value={this.state.commentInput}
-    onChange={this.handleComment}
-    placeholder='comment here'
-  />  
-<button className='add-comment-btn' onClick={() => this.addComment()}>Add Comment</button>
-{this.state.comments.map(comment => {
-    return (
-<article class="media" key={comment.comment_id}>
-      <figure class="media-left">
-        <p class="image is-48x48">
-          <img src={comment.profile_img} alt='profile'/>
-        </p>
-      </figure>
+   </article>
+   {this.state.showComments ? <div>
+   <input
+     className='comment-input'
+     value={this.state.commentInput}
+     onChange={this.handleComment}
+     placeholder='comment here'
+   />  
+              <button className='add-comment-btn' onClick={() => this.addComment()}>Add Comment</button>
+  {mappedComments}
+  </div> : null}
+   </div>
 
-      <div class="media-content">
-        <div class="content">
-          <p>
-            <strong>{comment.username}</strong>
-            <br/>
-            {comment.comment}
-            <br/>
-            {/* <small><a>Like</a> · <a>Reply</a> · 2 hrs</small> */}
-          </p>
-        </div>
-     </div>
-     </article> 
-     
-    )
-})
-    }
-               
-                 
-               
-                 
-    
-               
-         </div> : null }      
-        </div>
+ 
        )
     })
+
+    
         return (
             <div className='Home'>
               <Header />
@@ -172,8 +161,8 @@ class Home extends Component {
                <button className='post-btn' onClick={() => this.addPost()}>Post</button>
               <div>
               {mappedPosts}
-  
-              {/* {mappedComments} */}
+              
+              <h1 style={{color:'white'}}>Comments</h1>
               </div>
             </div>
         )

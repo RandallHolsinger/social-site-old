@@ -96,6 +96,7 @@ module.exports = {
   getComments: (req, res) => {
       db = req.app.get('db')
       const {post_id} =  req.params
+      console.log(req.params)
 
       db.comments.get_comments([post_id]).then(comments => {
           res.status(200).send(comments)

@@ -56,7 +56,6 @@ class PersonalProfile extends Component {
             this.setState({
                 pendingFriends: res.data
             })
-            console.log(res)
         })
     }
 
@@ -71,10 +70,9 @@ class PersonalProfile extends Component {
     submitAbout = () => {
         const {aboutInput} = this.state
         axios.put(`/api/user/about`, {aboutInput}).then(() => {
-            alert('about updated')
+            this.showAbout()
+            this.getUserProfile()
         })
-        this.showAbout()
-        this.getUserProfile()
     }
 
 
