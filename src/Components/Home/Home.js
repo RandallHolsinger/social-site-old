@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import "react-bulma-components/dist/react-bulma-components.min.css";
-//testing git
+
 
 class Home extends Component {
     constructor(props) {
