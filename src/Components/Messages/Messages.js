@@ -10,6 +10,7 @@
              messages: [],
              messageInput: ''
          }
+         this.handleInput = this.handleInput.bind(this)
      }
 
      getMessages = () => {
@@ -19,6 +20,12 @@
         //      })
         //  })
      }
+
+     handleInput(e) {
+         this.setState({
+             messageInput: e.target.value
+         })
+     }
      
      
 
@@ -27,6 +34,10 @@
          return (
              <div className='Messages'>
              <Header />
+             <input 
+               onChange={this.handleInput}
+               value={this.state.messageInput}
+             />
              
              </div>
          )
