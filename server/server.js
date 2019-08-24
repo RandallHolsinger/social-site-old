@@ -64,10 +64,17 @@ app.put('/api/user/about', ctrl.updateAbout)
 //friend endpoints
 
 app.get('/api/friends', ctrl.getFriends)
- 
+
+app.get('/api/friend/:friend_id', ctrl.getFriend)
+
 app.post('/api/friends/request/:id', ctrl.addFriend)
 
 app.get('/api/friends/pending', ctrl.getPendingFriends)
 
 app.put('/api/friends/confirmed/:id', ctrl.confirmFriend)
+
+//messages endpoints
+
+app.get('/api/user/messages', ctrl.getMessages)
+
 

@@ -111,7 +111,7 @@ module.exports = {
       db.comments.add_comment([user_id, post_id, commentInput]).then(() => res.sendStatus(200))
   },
 
-  //profile contollers
+  //Profile Controllers
   getProfiles: (req, res) => {
      db = req.app.get('db')
 
@@ -146,13 +146,22 @@ module.exports = {
       db.profile.update_about([aboutInput, user_id]).then(() => res.sendStatus(200))
   },
   
-  //friend controllers
+  //Friends Controllers
   getFriends: (req, res) => {
       db = req.app.get('db')
       const {user_id} = req.session.user
 
       db.friends.get_friends([user_id]).then(friends => {
           res.status(200).send(friends)
+      })
+  },
+
+  getFriend: (req, res) => {
+      db = req.app.get('db')
+      const {friend_id} = req.params
+
+      db.friends.get_friend([friend_id]).then(friend => {
+          res.status(200).send(friend)
       })
   },
 
@@ -181,5 +190,14 @@ module.exports = {
      
       console.log('22222', req.params)
       db.friends.confirm_friend([user_id, id]).then(() => res.sendStatus(200))
+  },
+
+  //Messages Controllers
+  getMessages: (req, res) => {
+      db = req.app.get('db')
+
+      db.messages.get_messages().then(messages => {
+          res.status(200).send(messages)
+      })
   }
 }

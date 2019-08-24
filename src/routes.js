@@ -4,10 +4,10 @@ import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import PersonalProfile from './Components/PersonalProfile/PersonalProfile';
 import Home from './Components/Home/Home';
-import Post from './Components/Post/Post';
 import Profiles from './Components/Profiles/Profiles';
 import ProfileView from './Components/ProfileView/ProfileView';
 import Messages from './Components/Messages/Messages';
+import Message from './Components/Message/Message';
 
 export default (
     <Switch>
@@ -17,7 +17,7 @@ export default (
       <Route path='/home' component={Home}/>
       <Route path='/profiles' component={Profiles}/>
       <Route path='/user/profile' component={PersonalProfile}/>
-      <Route path='/post/:post_id' component={Post}/>
       <Route path='/user/messages' component={Messages}/>
+      <Route path='/user/message/:friend_id' component={Message}/>
     </Switch>
 )
