@@ -11,7 +11,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 
 app.use(session({
     secret: SESSION_SECRET,
-    resave: true,
+    resave: false,
     saveUninitialized: true,
     cookie: {
         maxAge: 10000000000
@@ -76,5 +76,7 @@ app.put('/api/friends/confirmed/:id', ctrl.confirmFriend)
 //messages endpoints
 
 app.get('/api/user/messages', ctrl.getMessages)
+
+app.post('/api/sendMessage', ctrl.sendMessage)
 
 

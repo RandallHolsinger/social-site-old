@@ -195,9 +195,18 @@ module.exports = {
   //Messages Controllers
   getMessages: (req, res) => {
       db = req.app.get('db')
+      const {user_id} = req.session.user
 
-      db.messages.get_messages().then(messages => {
+      db.messages.get_messages([user_id]).then(messages => {
           res.status(200).send(messages)
       })
+  },
+
+  sendMessage: (req, res) => {
+      db = req.app.get('db')
+      const {user_id} = req.session.user
+      const {messageInput, id} = req.body
+
+      db.messages.send_message([user_id, id, messageInput]).then(() => res.sendStatus(200))
   }
 }

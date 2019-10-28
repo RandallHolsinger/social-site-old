@@ -53,7 +53,7 @@ class Header extends Component{
   <div className="navbar-brand">
     <Link to='/home' className="navbar-item" href="https://bulma.io">
     
-      <img src="https://bulma.io/images/bulma-logo.png" alt='logo' width="112" height="28"/>
+      <p className="logo">Social Site</p>
     </Link>
     
 

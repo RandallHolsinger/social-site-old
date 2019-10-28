@@ -33,6 +33,7 @@
              this.setState({
                  user: res.data[0]
              })
+             console.log(res)
          })
      }
 
@@ -50,7 +51,7 @@
          let mappedFriends = this.state.friends.map(friend => {
              return (
                 <Link to={`/user/message/${friend.friend_id}`}>
-                 <div className='messages-friends'>
+                 <div className='messages-friends' key={friend.friend_id}>
                    <img src={friend.profile_img} alt='profile' style={{width:'30px'}}/>
                    <p>{friend.username}</p>
                  </div>
@@ -60,21 +61,26 @@
 
          let mappedMessages = this.state.messages.map(message => {
              return (
-                 <div>
+                 <div key={message.message_id}>
                      <img src={message.profile_img} alt='profile' style={{width:'30px'}}/>
                      <p>{message.username}</p>
+                     <p>{message.message}</p>
                  </div>
              )
          })
+         const {user} = this.state
          return (
              <div className='Messages'>
-             <Header />
-              <h1>Friends</h1>
-              {mappedFriends}
-              <h1>Messages</h1>
-              {mappedMessages}
-             
-             </div>
+               <Header />
+               <h1>User</h1>
+               <img src={user.profile_img} alt='profile' style={{width: '100px', borderRadius: '100%'}}/>
+               <p>{user.username}</p>
+               <p>{user.about_me}</p>
+               <h1>Friends</h1>
+               {mappedFriends}
+               <h1>Messages</h1>
+               {mappedMessages}
+            </div>
          )
      }
  }

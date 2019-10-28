@@ -13,6 +13,7 @@ class Home extends Component {
         this.state = {
             posts: [],
             comments: [],
+            user: {},
             postInput: '',
             commentInput: '',
             postId: 0,
@@ -26,8 +27,18 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        this.getUser()
         this.getPosts()
     }
+    
+    getUser = () => {
+        axios.get(`/api/user/profile`).then(res => {
+            this.setState({
+                user: res.data[0]
+            })
+        })
+    }
+
     getPosts = () => {
         axios.get(`/api/getPosts`).then(res => {
             this.setState({
@@ -80,6 +91,7 @@ class Home extends Component {
     
     
     render() {
+        const {user} = this.state
         let mappedComments = this.state.comments.map(comment => {
             return (
                <article className="media" key={comment.comment_id}>
@@ -123,7 +135,7 @@ class Home extends Component {
     </div>
     <nav className="level is-mobile">
       <div className="level-left">
-        <button onClick={() => this.toggleComment(post.post_id)}className="level-item">
+        <button onClick={() => this.toggleComment(post.post_id)} className="level-item">
           <span className="icon is-small"><i className="fas fa-reply"></i></span>
         </button>
       </div>
@@ -145,12 +157,19 @@ class Home extends Component {
  
        )
     })
-
+  
     
         return (
             <div className='Home'>
               <Header />
-              add a post
+              <h1 style={{color:'white'}}>Personal User</h1>
+             <div className='personal-user-wrapper'>
+               <img src={user.profile_img} alt='profile' style={{width: '100px', borderRadius: '100%'}}/>
+               <p>{user.username}</p>
+               <p>About Me:</p>
+               <p>{user.about_me}</p>
+             </div>
+              <h1 style={{color: 'white'}}>Posts / Add Posts</h1>
               <input 
                  className='post-input'
                  value={this.state.postInput}
