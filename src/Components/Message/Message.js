@@ -41,7 +41,9 @@ class Message extends Component {
 
     sendMessage = (id) => {
         const {messageInput} = this.state
-        axios.post(`/api/sendMessage`, {messageInput, id})
+        axios.post(`/api/sendMessage`, {messageInput, id}).then(() => {
+            alert('Message has been sent sucessfuly!')
+        })
     }
     
     handleMessageInput(e) {

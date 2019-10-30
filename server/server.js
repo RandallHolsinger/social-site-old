@@ -4,17 +4,27 @@ const app = express()
 const massive = require('massive')
 const session = require('express-session')
 const ctrl = require('./controllers')
+const pg = require('pg')
+const pgSession = require('connect-pg-simple')(session)
 
-app.use(express.json());
 
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 
+const pgPool = new pg.Pool({
+    connectionString: CONNECTION_STRING
+})
+
+app.use(express.json());
+
 app.use(session({
+    store: new pgSession({
+        pool: pgPool
+    }),
     secret: SESSION_SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     cookie: {
-        maxAge: 10000000000
+        maxAge: 8*60*60*1000
     }
 }))
 
@@ -22,7 +32,7 @@ massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
     console.log('You are connected to the Database')
     
-    app.listen(SERVER_PORT, ()=> console.log(`listening on Port: ${SERVER_PORT}`))
+    app.listen(SERVER_PORT, ()=> console.log(`Making 💵  Money 💵  On Port: ${SERVER_PORT}`))
 })
 
 // auth endpoints

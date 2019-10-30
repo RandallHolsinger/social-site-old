@@ -18,6 +18,7 @@
      componentDidMount() {
          this.getUser()
          this.getFriends()
+         this.getMessages()
      }
      
      getFriends = () => {
@@ -33,7 +34,6 @@
              this.setState({
                  user: res.data[0]
              })
-             console.log(res)
          })
      }
 
@@ -42,6 +42,7 @@
             this.setState({
                 messages: res.data
             })
+            console.log(res.data)
         })
      }
      

@@ -1,3 +1,2 @@
-select * from messages as m 
-join users as u on m.user_id = u.user_id
-where user_id = $1
+select * from messages
+where user_id = $1 or user_id2 = $1
