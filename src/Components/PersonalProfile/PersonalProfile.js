@@ -59,10 +59,11 @@ class PersonalProfile extends Component {
         })
     }
 
-    confirmRequest = (id) => {
-        axios.put(`/api/friends/confirmed/${id}`).then(() => {
+    confirmRequest = (user_id2) => {
+        axios.put(`/api/friends/confirmed/`, {user_id2}).then(() => {
             alert('friend request accepted')
         })
+        console.log('front end', user_id2)
         this.getUserFriendRequests()
         this.getUserFriends()
     }

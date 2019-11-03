@@ -18,7 +18,11 @@ export default function ParticlesJS() {
                         
             			
             		}
-            	}}
+                }}
+                style ={{
+                    width: '100%',
+                    background: '#000000'
+                }}
             />
         </div>
     )

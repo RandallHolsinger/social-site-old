@@ -16,8 +16,8 @@ class Home extends Component {
             user: {},
             postInput: '',
             commentInput: '',
-            postId: 0,
-            showComments: false
+            showComments: false,
+            postId: 0
         }
 
         this.handlePost = this.handlePost.bind(this)

@@ -62,6 +62,9 @@ module.exports = {
     
       db.posts.get_posts().then(posts => {
           res.status(200).send(posts)
+      }).catch( err => {
+          res.status(500).send({errorMessage: 'Something went wrong getting posts'})
+          console.log(err)
       })
   },
 
@@ -71,6 +74,9 @@ module.exports = {
 
     db.posts.get_post([post_id]).then(post => {
         res.status(200).send(post)
+    }).catch(err => {
+        res.status(500).send({errorMessage: 'someting went wrong getting post'})
+        console.log(err)
     })
 
 
@@ -82,6 +88,10 @@ module.exports = {
       const {postInput} = req.body
       
       db.posts.add_post([user_id, postInput]).then(() => res.sendStatus(200))
+      .catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong adding a post'})
+          console.log(err)
+      })
   },
 
   getUserPosts: (req, res) => {
@@ -90,6 +100,9 @@ module.exports = {
 
      db.posts.get_user_posts([user_id]).then(posts => {
          res.status(200).send(posts)
+     }).catch(err => {
+         res.status(500).send({errorMessage: "something went wrong getting user's post"})
+         console.log(err)
      })
   },
 
@@ -100,6 +113,9 @@ module.exports = {
 
       db.comments.get_comments([post_id]).then(comments => {
           res.status(200).send(comments)
+      }).catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong getting comments'})
+          console.log(err)
       })
   },
 
@@ -109,6 +125,10 @@ module.exports = {
       const {post_id, commentInput} = req.body
 
       db.comments.add_comment([user_id, post_id, commentInput]).then(() => res.sendStatus(200))
+      .catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong adding comments'})
+          console.log(err)
+      })
   },
 
   //Profile Controllers
@@ -117,6 +137,9 @@ module.exports = {
 
      db.profile.get_profiles().then(profiles => {
          res.status(200).send(profiles)
+     }).catch(err => {
+         res.status(500).send({errorMessage: 'something went wrong get profiles'})
+         console.log(err)
      })
   },
 
@@ -126,6 +149,9 @@ module.exports = {
 
       db.profile.get_user_profile([user_id]).then(profile => {
           res.status(200).send(profile)
+      }).catch(err => {
+          res.statuss(500).send({errorMessage: 'something went wrong getting user profile'})
+          console.log(err)
       })
   },
 
@@ -135,6 +161,9 @@ module.exports = {
 
       db.profile.get_profile([user_id]).then(profile => {
           res.status(200).send(profile)
+      }).catch(err => {
+          res.status(500).send({errorMessage: "something went wrong get the user's profile"})
+          console.log(err)
       })
   },
 
@@ -144,6 +173,10 @@ module.exports = {
       const {aboutInput} = req.body
 
       db.profile.update_about([aboutInput, user_id]).then(() => res.sendStatus(200))
+      .catch(err => {
+          res.status(500).send({errorMessage: 'somehing went wrong trying to update about'})
+          console.log(err)
+      })
   },
   
   //Friends Controllers
@@ -153,6 +186,9 @@ module.exports = {
 
       db.friends.get_friends([user_id]).then(friends => {
           res.status(200).send(friends)
+      }).catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong getting friends'})
+          console.log(err)
       })
   },
 
@@ -162,6 +198,9 @@ module.exports = {
 
       db.friends.get_friend([friend_id]).then(friend => {
           res.status(200).send(friend)
+      }).catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong getting friend'})
+          console.log(err)
       })
   },
 
@@ -171,6 +210,10 @@ module.exports = {
       const {id} = req.params
 
       db.friends.add_friend([user_id, id]).then(() => res.sendStatus(200))
+      .catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong adding friend'})
+          console.log(err)
+      })
   },
 
   getPendingFriends: (req, res) => {
@@ -179,6 +222,9 @@ module.exports = {
      
       db.friends.get_pending([user_id]).then(pending => {
           res.status(200).send(pending)
+      }).catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong getting friend requests'})
+          console.log(err)
       })
       
   },
@@ -186,10 +232,15 @@ module.exports = {
   confirmFriend: (req, res) => {
       db = req.app.get('db')
       const {user_id} = req.session.user
-      const {id} = req.params
+      const {user_id2} = req.body
+      console.log(111, user_id)
+      console.log(222, user_id2)
      
-      console.log('22222', req.params)
-      db.friends.confirm_friend([user_id, id]).then(() => res.sendStatus(200))
+      db.friends.confirm_friend([user_id, user_id2]).then(() => res.sendStatus(200))
+      .catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong confirming friend request'})
+          console.log(err)
+      })
   },
 
   //Messages Controllers
@@ -199,6 +250,9 @@ module.exports = {
 
       db.messages.get_messages([user_id]).then(messages => {
           res.status(200).send(messages)
+      }).catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong with getting messages'})
+          console.log(err)
       })
   },
 
@@ -208,5 +262,9 @@ module.exports = {
       const {messageInput, id} = req.body
 
       db.messages.send_message([user_id, id, messageInput]).then(() => res.sendStatus(200))
+      .catch(err => {
+          res.status(500).send({errorMessage: 'somthing went wrong sending a message'})
+          console.log(err)
+      })
   }
 }

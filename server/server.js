@@ -81,7 +81,7 @@ app.post('/api/friends/request/:id', ctrl.addFriend)
 
 app.get('/api/friends/pending', ctrl.getPendingFriends)
 
-app.put('/api/friends/confirmed/:id', ctrl.confirmFriend)
+app.put('/api/friends/confirmed', ctrl.confirmFriend)
 
 //messages endpoints
 

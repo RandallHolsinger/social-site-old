@@ -1,3 +1,3 @@
-update friends
-set confirmed = 1
-where user_id2 = $1 and user_id = $2
+update friends 
+set confirmed = 1 
+where user_id = $1 and user_id2 = $2
