@@ -24,7 +24,6 @@ class PersonalProfile extends Component {
       this.getUserProfile()
       this.getUserPosts()
       this.getUserFriends()
-      this.getUserFriendRequests()
     }
 
     getUserProfile = () => {
@@ -59,13 +58,12 @@ class PersonalProfile extends Component {
         })
     }
 
-    confirmRequest = (user_id2) => {
-        axios.put(`/api/friends/confirmed/`, {user_id2}).then(() => {
+    confirmRequest = (friend_id) => {
+        axios.put(`/api/friends/confirmed`, {friend_id}).then(() => {
             alert('friend request accepted')
+            this.getUserFriends()
+            this.getUserFriendRequests()
         })
-        console.log('front end', user_id2)
-        this.getUserFriendRequests()
-        this.getUserFriends()
     }
 
     submitAbout = () => {
@@ -99,7 +97,7 @@ class PersonalProfile extends Component {
                     <div key={friend.friend_id} className='friend-request-wrapper'>
                         <img src={friend.profile_img} alt='profile' style={{width:'30px'}}/>
                          <p>{friend.username}</p>
-                        <button onClick={() => this.confirmRequest(friend.user_id)}>Confirm</button>
+                        <button onClick={() => this.confirmRequest(friend.friend_id)}>Confirm</button>
                     </div>
                 )
         })

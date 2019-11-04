@@ -26,7 +26,7 @@ class Profiles extends Component {
     }
 
     sendFriendRequest = (id) => {
-        axios.post(`/api/friends/request/${id}`).then(()=> {
+        axios.post(`/api/friends/request`, {id}).then(()=> {
             alert('friend request sent!')
         })
     }
