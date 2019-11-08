@@ -26,6 +26,7 @@
             this.setState({
                 friends: res.data
             })
+            console.log(res.data)
         })
      }
 
@@ -42,7 +43,6 @@
             this.setState({
                 messages: res.data
             })
-            console.log(res.data)
         })
      }
      

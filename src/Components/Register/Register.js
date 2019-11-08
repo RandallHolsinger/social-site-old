@@ -31,7 +31,6 @@ class Register extends Component {
         try {
             const {username, password, email, defaultImage} = this.state
             let res = await axios.post('/auth/register', {username, password, email, defaultImage})
-            console.log(this.state)
             this.props.updateUser(res.data)
             this.props.history.push('/home')
         } catch(err) {

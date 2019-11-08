@@ -24,6 +24,7 @@ class PersonalProfile extends Component {
       this.getUserProfile()
       this.getUserPosts()
       this.getUserFriends()
+      this.getUserFriendRequests()
     }
 
     getUserProfile = () => {
@@ -47,6 +48,7 @@ class PersonalProfile extends Component {
             this.setState({
                 friends: res.data
             })
+            console.log(res.data)
         })
     }
 
@@ -106,6 +108,7 @@ class PersonalProfile extends Component {
             return (
                 <div key={friend.friend_id}>
                   <img src={friend.profile_img} alt='profile' style={{width:'30px'}}/>
+                  <h1>{friend.user_id}</h1>
                   <p>{friend.username}</p>
                 </div>
             )
