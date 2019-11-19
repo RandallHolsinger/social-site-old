@@ -107,9 +107,8 @@ class PersonalProfile extends Component {
         let mappedFriends =  this.state.friends.map(friend => {
             return (
                 
-                <div key={friend.friend_id}>
+                <div key={friend.friend_id} className='friends-wrapper'>
                   <img src={friend.profile_img} alt='profile' style={{width:'30px'}}/>
-                  <h1>{friend.user_id}</h1>
                   <p>{friend.username}</p>
                 </div>
             )
@@ -155,6 +154,8 @@ class PersonalProfile extends Component {
                <h1 style={{color:'white'}}>Friends</h1>
                {mappedFriends}
             </div>
+        
+    
         )
     }
 }

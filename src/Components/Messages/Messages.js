@@ -1,7 +1,7 @@
  import React, {Component} from 'react';
+ import './Messages.css'
  import axios from 'axios';
  import Header from '../Header/Header'
- import {Link} from 'react-router-dom'
 
 
  class Messages extends Component {
@@ -26,7 +26,7 @@
             this.setState({
                 friends: res.data
             })
-            console.log(res.data)
+            console.log('get friends', res.data)
         })
      }
 
@@ -45,25 +45,28 @@
             })
         })
      }
-     
-     
+
+    getFriendMessages = (friend_id) => {
+        axios.get(`/api/friend/messages`, {friend_id}).then(res => {
+            this.setState({
+                messages: res.data
+            })
+        })
+    }   
      
      render() {
          let mappedFriends = this.state.friends.map(friend => {
              return (
-                <Link to={`/user/message/${friend.friend_id}`}>
-                 <div className='messages-friends' key={friend.friend_id}>
+                 <div key={friend.friend_id} onClick={this.getFriendMessages(friend.friend_id)} className='messages-friends-wrapper'>
                    <img src={friend.profile_img} alt='profile' style={{width:'30px'}}/>
                    <p>{friend.username}</p>
                  </div>
-                 </Link>
              )
          })
 
          let mappedMessages = this.state.messages.map(message => {
              return (
                  <div key={message.message_id}>
-                     <img src={message.profile_img} alt='profile' style={{width:'30px'}}/>
                      <p>{message.username}</p>
                      <p>{message.message}</p>
                  </div>

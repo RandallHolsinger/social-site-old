@@ -1,6 +1,4 @@
-.PersonalProfile {
-    
-}
+
 .personal-user-wrapper {
     display: flex;
     flex-direction: column;
@@ -16,4 +14,15 @@
     margin-top: 20px;
     padding: 20px;
     width: 50%;
+}
+
+.friends-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 3px solid springgreen;
+    border-radius: 5px;
+    width: 200px;
+    padding: 5px;
+    margin-top: 10px;
 }

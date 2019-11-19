@@ -11,6 +11,7 @@ module.exports = {
       let takenUsername = await db.auth.check_username({username})
       takenUsername = +takenUsername[0].count;
       if(takenUsername !== 0){
+          alert('username is taken!')
           return res.sendStatus(409)
       }
 
@@ -248,6 +249,18 @@ module.exports = {
           res.status(200).send(messages)
       }).catch(err => {
           res.status(500).send({errorMessage: 'something went wrong with getting messages'})
+          console.log(err)
+      })
+  },
+
+  getFriendMessages: (req,res) => {
+      const db = req.app.get('db')
+      const {friend_id} = req.body
+
+      db.get_friend_messages([friend_id]).then(messages => {
+          res.status(200).send(messages)
+      }).catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong getting friend messages'})
           console.log(err)
       })
   },

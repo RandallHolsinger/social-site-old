@@ -20,14 +20,15 @@ class Message extends Component {
     componentDidMount() {
          this.getUser()
          this.getFriend()
-         console.log(this.state)
+         console.log(this.state.friend)
     }
 
     getFriend = () => {
-        axios.get(`/api/friend/${this.props.match.params.friend_id}`).then(res => {
+        axios.get(`/api/friend/${this.props.match.params.user_id}`).then(res => {
             this.setState({
                 friend: res.data[0]
             })
+            console.log(this.props)
         })
     }
 
