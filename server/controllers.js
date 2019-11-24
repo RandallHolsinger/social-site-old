@@ -183,6 +183,7 @@ module.exports = {
   getFriends: (req, res) => {
       db = req.app.get('db')
       const {user_id} = req.session.user
+      console.log('getting friends', user_id)
 
       db.friends.get_friends([user_id]).then(friends => {
           res.status(200).send(friends)
@@ -231,9 +232,10 @@ module.exports = {
 
   confirmFriend: (req, res) => {
       db = req.app.get('db')
-      const {friend_id} = req.body
+      //issue with id whhi id being updated?->
+      const {user_id} = req.body
      
-      db.friends.confirm_friend([friend_id]).then(() => res.sendStatus(200))
+      db.friends.confirm_friend([user_id]).then(() => res.sendStatus(200))
       .catch(err => {
           res.status(500).send({errorMessage: 'something went wrong confirming friend request'})
           console.log(err)

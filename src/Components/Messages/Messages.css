@@ -8,3 +8,12 @@
     padding: 5px;
     margin-top: 10px;
 }
+
+.messages-wrapper {
+    border: 3px solid springgreen;
+    background-color: #fff;
+    border-radius: 5px;
+    width: 50%;
+    margin-top: 20px;
+    padding: 10px;
+}

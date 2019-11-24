@@ -57,11 +57,13 @@ class PersonalProfile extends Component {
             this.setState({
                 pendingFriends: res.data
             })
+            console.log('pending friends', res.data)
         })
     }
 
-    confirmRequest = (friend_id) => {
-        axios.put(`/api/friends/confirmed`, {friend_id}).then(() => {
+    confirmRequest = (user_id) => {
+        axios.put(`/api/friends/confirmed`, {user_id}).then(() => {
+            console.log(user_id)
             alert('friend request accepted')
             this.getUserFriends()
             this.getUserFriendRequests()
@@ -99,7 +101,7 @@ class PersonalProfile extends Component {
                     <div key={friend.friend_id} className='friend-request-wrapper'>
                         <img src={friend.profile_img} alt='profile' style={{width:'30px'}}/>
                          <p>{friend.username}</p>
-                        <button onClick={() => this.confirmRequest(friend.friend_id)}>Confirm</button>
+                        <button onClick={() => this.confirmRequest(friend.user_id)}>Confirm</button>
                     </div>
                 )
         })

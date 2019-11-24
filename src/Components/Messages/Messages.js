@@ -11,7 +11,8 @@
          this.state = {
              user: {},
              messages: [],
-             friends: [],
+             friendMessages: [],
+             friends: []
          }
      }
 
@@ -49,7 +50,7 @@
     getFriendMessages = (friend_id) => {
         axios.get(`/api/friend/messages`, {friend_id}).then(res => {
             this.setState({
-                messages: res.data
+                friendMessages: res.data
             })
         })
     }   
@@ -66,7 +67,8 @@
 
          let mappedMessages = this.state.messages.map(message => {
              return (
-                 <div key={message.message_id}>
+                 <div key={message.message_id} className='messages-wrapper'>
+                 <img src={message.profile_img} alt='profile' style={{width: '50px', height:'50px'}}/>
                      <p>{message.username}</p>
                      <p>{message.message}</p>
                  </div>
