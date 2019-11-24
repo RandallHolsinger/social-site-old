@@ -193,18 +193,6 @@ module.exports = {
       })
   },
 
-  getFriend: (req, res) => {
-      db = req.app.get('db')
-      const {friend_id} = req.params
-
-      db.friends.get_friend([friend_id]).then(friend => {
-          res.status(200).send(friend)
-      }).catch(err => {
-          res.status(500).send({errorMessage: 'something went wrong getting friend'})
-          console.log(err)
-      })
-  },
-
   addFriend: (req, res) => {
       db = req.app.get('db')
       const {user_id} = req.session.user

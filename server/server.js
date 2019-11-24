@@ -75,8 +75,6 @@ app.put('/api/user/about', ctrl.updateAbout)
 
 app.get('/api/friends', ctrl.getFriends)
 
-app.get('/api/friend/:friend_id', ctrl.getFriend)
-
 app.post('/api/friends/request', ctrl.addFriend)
 
 app.get('/api/friends/pending', ctrl.getPendingFriends)
