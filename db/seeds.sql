@@ -39,15 +39,16 @@ create table comments (
 
 create table friends (
   friend_id serial primary key not null,
-  user_id integer,
-  user_id2 integer,
-  confirmed integer
+  user_id1 integer not null,
+  user_id2 integer not null,
+  confirmed integer default 0
 )
 
 create table messages (
    message_id serial primary key not null,
-   user_id integer,
+   user_id1 integer,
    user_id2 integer,
+   subject varchar(40),
    message text,
    date TIMESTAMP
 )

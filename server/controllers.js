@@ -183,7 +183,6 @@ module.exports = {
   getFriends: (req, res) => {
       db = req.app.get('db')
       const {user_id} = req.session.user
-      console.log('getting friends', user_id)
 
       db.friends.get_friends([user_id]).then(friends => {
           res.status(200).send(friends)
@@ -245,9 +244,10 @@ module.exports = {
 
   getFriendMessages: (req,res) => {
       const db = req.app.get('db')
-      const {friend_id} = req.body
+      const {user_id} = req.session.user
+      const {friendUserId} = req.body
 
-      db.get_friend_messages([friend_id]).then(messages => {
+      db.messages.get_friend_messages([user_id, friendUserId]).then(messages => {
           res.status(200).send(messages)
       }).catch(err => {
           res.status(500).send({errorMessage: 'something went wrong getting friend messages'})
