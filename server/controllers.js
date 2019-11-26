@@ -86,9 +86,10 @@ module.exports = {
   addPost: (req, res) => {
       db = req.app.get('db')
       const {user_id} = req.session.user
-      const {postInput} = req.body
+      const {data} = req.body
+      console.log(data)
       
-      db.posts.add_post([user_id, postInput]).then(() => res.sendStatus(200))
+      db.posts.add_post([user_id, data]).then(() => res.sendStatus(200))
       .catch(err => {
           res.status(500).send({errorMessage: 'something went wrong adding a post'})
           console.log(err)
@@ -245,7 +246,8 @@ module.exports = {
   getFriendMessages: (req,res) => {
       const db = req.app.get('db')
       const {user_id} = req.session.user
-      const {friendUserId} = req.body
+      const {friendUserId} = req.params
+      console.log('hitting backend', friendUserId)
 
       db.messages.get_friend_messages([user_id, friendUserId]).then(messages => {
           res.status(200).send(messages)

@@ -44,15 +44,17 @@
             this.setState({
                 messages: res.data
             })
+            console.log('all messages', res.data)
         })
      }
 
     getFriendMessages = (friendUserId) => {
-        axios.get(`/api/friend/messages`, {friendUserId}).then(res => {
+        console.log('friend user_id', friendUserId)
+        axios.get(`/api/friend/messages/${friendUserId}`).then(res => {
             this.setState({
                 friendMessages: res.data
             })
-            console.log('friend messages', res.data)
+            console.log('friend messages / ID', res.data, friendUserId)
         })
     }   
      
