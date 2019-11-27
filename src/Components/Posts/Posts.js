@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import './Posts.css'
-import axios from 'axios'
+import './Posts.css';
+import axios from 'axios';
+import Comments from '../Comments/Comments';
 
 class Posts extends Component {
     constructor(props) {
@@ -55,6 +56,9 @@ class Posts extends Component {
                     <img src={post.profile_img} alt='profile'/>
                     <p>{post.username}</p>
                     <p>{post.post}</p>
+                    <div className='comments-wrapper'>
+                      <Comments postId={post.post_id} />
+                    </div>
                 </div>
             )
         })

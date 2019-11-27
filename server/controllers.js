@@ -108,6 +108,8 @@ module.exports = {
      })
   },
 
+  //Comments controllers
+
   getComments: (req, res) => {
       db = req.app.get('db')
       const {post_id} =  req.params
@@ -121,15 +123,15 @@ module.exports = {
   },
 
   addComment: (req, res) => {
-      db = req.app.get('db')
-      const {user_id} = req.session.user
-      const {post_id, commentInput} = req.body
+    db = req.app.get('db')
+    const {user_id} = req.session.user
+    const {postId, commentInput} = req.body
+    console.log('hitting', req.body)
 
-      db.comments.add_comment([user_id, post_id, commentInput]).then(() => res.sendStatus(200))
-      .catch(err => {
-          res.status(500).send({errorMessage: 'something went wrong adding comments'})
-          console.log(err)
-      })
+    db.comments.add_comment([user_id, postId, commentInput]).then(() => res.sendStatus(200))
+    .catch(err => {
+        res.status(500).send({errorMessage: 'something went wrong adding a comment'})
+    })
   },
 
   //Profile Controllers
