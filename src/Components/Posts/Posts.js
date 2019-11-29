@@ -21,7 +21,6 @@ class Posts extends Component {
     addPost = () => {
         let data = this.state.postInput
        axios.post(`/api/addPost`, {data}).then(() => {
-           alert('Post Added')
            this.getPosts()
        })
     }
@@ -31,7 +30,6 @@ class Posts extends Component {
             this.setState({
                 posts: res.data
             })
-            console.log('posts', res.data)
         })
     }
 

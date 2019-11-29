@@ -12,7 +12,8 @@
              user: {},
              messages: [],
              friendMessages: [],
-             friends: []
+             friends: [],
+             friendId: 0
          }
      }
 
@@ -77,8 +78,20 @@
                    </div>
                     <p>Subject: {message.subject}</p>
                     <p>Message: {message.message.split('\n')[0] + ' .........'}</p>
-                   
                  </div>
+             )
+         })
+
+         let mappedFriendMessages =  this.state.friendMessages.map(message => {
+             return (
+                <div key={message.message_id} className='messages-wrapper'>
+                <div className='user-info-messages'>
+                  <img src={message.profile_img} alt='profile' style={{width: '25px', height:'25px'}}/>
+                  <p>{message.username}</p>
+                </div>
+                 <p>Subject: {message.subject}</p>
+                 <p>Message: {message.message.split('\n')[0] + ' .........'}</p>
+              </div>
              )
          })
 
@@ -92,15 +105,11 @@
                  <p>{user.username}</p>
                  <p>{user.about_me}</p>
                </div>
-               <h1>Friends</h1>
+               <h1 style={{color: '#fff'}}>FriendMessages</h1>
                {mappedFriends}
                <h1>Messages</h1>
                <button>Create Message</button>
-               {this.state.messages[0] ? mappedMessages : 
-                <div>
-                   <h1 className='no-messages'>No Messages Found</h1>
-                </div>
-               }
+                {mappedMessages}
             </div>
          )
      }

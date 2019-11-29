@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './Register.css';
 import axios from 'axios';
-import ParticlesJS from '../particlesJS';
 import {connect} from 'react-redux';
 import {updateUser, clearUser} from '../../redux/reducer';
 
@@ -242,7 +241,6 @@ class Register extends Component {
                
               <button className='submit-reg' onClick={() => this.register()}>Submit</button>
              </div>
-             <ParticlesJS />
          </div>
         )
     }

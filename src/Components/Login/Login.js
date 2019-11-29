@@ -3,7 +3,7 @@ import "./Login.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import { updateUser, clearUser } from "../../redux/reducer";
-
+import Particle from '../Particle/Particle'
 import "react-bulma-components/dist/react-bulma-components.min.css";
 
 class Login extends Component {
@@ -53,18 +53,18 @@ class Login extends Component {
       password: e.target.value
     });
   }
-
+  
   routeRegister = () => {
     this.props.history.push("/register");
   };
-
+  
   render() {
     return (
       <div className="Login">
         <div className='login-form'>
         <div className="field">
           <label className="label">Username</label>
-          <div className="control has-icons-left has-icons-right">
+          <div className="control has-icons-left">
             <input
               className="input"
               type="text"
@@ -75,15 +75,12 @@ class Login extends Component {
             <span className="icon is-small is-left">
               <i className="fas fa-user" />
             </span>
-            <span className="icon is-small is-right">
-              <i className="fas fa-check" />
-            </span>
           </div>
         </div>
 
         <div className="field">
           <label className="label">Password</label>
-          <div className="control has-icons-left has-icons-right">
+          <div className="control has-icons-left">
             <input
               className="input"
               type="password"
@@ -94,15 +91,13 @@ class Login extends Component {
             <span className="icon is-small is-left">
             <i className="fas fa-lock"></i>
             </span>
-            <span className="icon is-small is-right">
-              <i className="fas fa-exclamation-triangle"></i>
-            </span>
           </div>
         </div>
         <button onClick={this.login}>Login</button>
         <button onClick={() => this.routeRegister()}>Register</button>
 
         </div>
+        <Particle />
       </div>
     );
   }

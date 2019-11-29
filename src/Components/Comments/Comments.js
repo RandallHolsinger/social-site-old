@@ -14,7 +14,6 @@ class Comments extends Component {
     }
 
     componentDidMount() {
-        console.log('props here', this.props)
         this.getCommentsFromPost()
     }
 
@@ -30,7 +29,6 @@ class Comments extends Component {
         const {postId} = this.props
         const {commentInput} = this.state
         axios.post(`/api/comment/add`, {postId, commentInput}).then(() => {
-            alert('comment added')
             this.getCommentsFromPost()
         })
     }
