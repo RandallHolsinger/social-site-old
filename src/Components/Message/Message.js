@@ -42,7 +42,6 @@ class Message extends Component {
        let {messageId} = this.props
        axios.post(`/api/message/reply`, {replyInput, messageId}).then(() => {
            this.getMessageReplies()
-           alert('reply added')
        })
     }
 

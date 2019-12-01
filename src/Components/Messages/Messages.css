@@ -44,3 +44,28 @@
 .user-info-messages {
     display: flex;
 }
+
+.selected-friend-container {
+    display: flex;
+    padding: 5px;
+}
+
+.dropdown-item:hover {
+   background-color: springgreen;
+   transition: .2s;
+}
+
+.message-modal-wrapper {
+    border: 1px solid black;
+    background-color: #fff;
+    width: 50%;
+    height: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}

@@ -258,9 +258,9 @@ module.exports = {
   sendMessage: (req, res) => {
       db = req.app.get('db')
       const {user_id} = req.session.user
-      const {messageInput, id} = req.body
+      const {user_id2, subject, message} = req.body
 
-      db.messages.send_message([user_id, id, messageInput]).then(() => res.sendStatus(200))
+      db.messages.send_message([user_id, user_id2, subject, message]).then(() => res.sendStatus(200))
       .catch(err => {
           res.status(500).send({errorMessage: 'somthing went wrong sending a message'})
           console.log(err)
