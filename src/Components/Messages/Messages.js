@@ -11,9 +11,12 @@
          this.state = {
              user: {},
              messages: [],
-             friendMessages: [],
+             messageInput:'',
              friends: [],
-             friendId: 0
+             friendId: 0,
+             activeIndex: 0,
+             showMessageModal: false,
+             selectedFriend: ''
          }
      }
 
@@ -47,24 +50,58 @@
         })
      }
 
-    getFriendMessages = (friendUserId) => {
+    getFriendMessages = (friendUserId, index) => {
+        this.toggleFriendActive(index)
         console.log('friend user_id', friendUserId)
         axios.get(`/api/friend/messages/${friendUserId}`).then(res => {
             this.setState({
-                friendMessages: res.data
+                messages: res.data
             })
         })
     }   
+
+    sendMessage = () => {
+        axios.post(`/api/message`)
+    }
+
+    toggleFriendActive = (index) => {
+        console.log(index)
+        this.setState({
+           activeIndex: index
+        })
+    }
+
+    showMessageModal = () => {
+        this.setState({
+            showMessageModal: !this.state.showMessageModal
+        })
+    }
+
+    handleMessage = (e) => {
+        this.setState({
+            messageInput: e.target.value
+        })
+    }
      
      render() {
          let mappedFriends = this.state.friends.map(friend => {
              return (
-                 <div key={friend.friend_id} onClick={() => this.getFriendMessages(friend.user_id)} className='messages-friends-wrapper'>
+                 <div key={friend.friend_id} onClick={() => this.getFriendMessages(friend.user_id, friend.friend_id)} className={this.state.activeIndex === friend.friend_id ? 'messages-friends-wrapper active' : 'messages-friends-wrapper'}>
                    <img src={friend.profile_img} alt='profile' style={{width:'30px'}}/>
                    <p>{friend.username}</p>
                  </div>
              )
          })
+
+         let mappedSelectedFriends = this.state.friends.map(friend => {
+             return (
+               <div key={friend.friend_id} onClick={() => this.getFriendMessages(friend.user_id, friend.friend_id)} className={this.state.activeIndex === friend.friend_id ? 'messages-friends-wrapper active' : 'messages-friends-wrapper'}>
+                 <img src={friend.profile_img} alt='profile' style={{width:'30px'}}/>
+                 <p>{friend.username}</p>
+               </div>
+             )
+         })
+
 
          let mappedMessages = this.state.messages.map(message => {
              return (
@@ -80,19 +117,6 @@
              )
          })
 
-        //  let mappedFriendMessages =  this.state.friendMessages.map(message => {
-        //      return (
-        //         <div key={message.message_id} className='messages-wrapper'>
-        //         <div className='user-info-messages'>
-        //           <img src={message.profile_img} alt='profile' style={{width: '25px', height:'25px'}}/>
-        //           <p>{message.username}</p>
-        //         </div>
-        //          <p>Subject: {message.subject}</p>
-        //          <p>Message: {message.message.split('\n')[0] + ' .........'}</p>
-        //       </div>
-        //      )
-        //  })
-
          const {user} = this.state
          return (
              <div className='Messages'>
@@ -104,10 +128,28 @@
                  <p>{user.about_me}</p>
                </div>
                <h1 style={{color: '#fff'}}>FriendMessages</h1>
-               {mappedFriends}
+                 {mappedFriends}
                <h1>Messages</h1>
-               <button>Create Message</button>
-                {mappedMessages}
+               <button onClick={() => this.showMessageModal()}>Create Message</button>
+               {this.state.showMessageModal ? 
+                <div>
+                    <input 
+                      onChange={this.handleMessage}
+                      value={this.state.messageInput}
+                      type='text'
+                      placeholder='Write Message...'
+                    />
+                    <button onClick={() => this.sendMessage()}>Send</button>
+                 </div> : null
+               }
+               {this.state.messages[0] ?
+                <div>
+                    {mappedMessages}
+                </div> :
+                <div>
+                    <p style={{fontSize: '50px'}}>No Messages Found</p>
+                </div>
+                }
             </div>
          )
      }

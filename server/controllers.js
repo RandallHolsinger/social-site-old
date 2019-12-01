@@ -87,7 +87,6 @@ module.exports = {
       db = req.app.get('db')
       const {user_id} = req.session.user
       const {data} = req.body
-      console.log(data)
       
       db.posts.add_post([user_id, data]).then(() => res.sendStatus(200))
       .catch(err => {
@@ -126,7 +125,6 @@ module.exports = {
     db = req.app.get('db')
     const {user_id} = req.session.user
     const {postId, commentInput} = req.body
-    console.log('hitting', req.body)
 
     db.comments.add_comment([user_id, postId, commentInput]).then(() => res.sendStatus(200))
     .catch(err => {
@@ -248,7 +246,6 @@ module.exports = {
       db = req.app.get('db')
       const {user_id} = req.session.user
       const {friendUserId} = req.params
-      console.log('hitting backend', friendUserId)
 
       db.messages.get_friend_messages([user_id, friendUserId]).then(messages => {
           res.status(200).send(messages)
@@ -273,7 +270,6 @@ module.exports = {
   getMessageReplies: (req, res) => {
       db = req.app.get('db')
       const {message_id} = req.params
-      console.log('hitting', req.params)
 
       db.messages.get_message_replies([message_id]).then(replies => {
           res.status(200).send(replies)

@@ -24,6 +24,10 @@
     transition: .2s;
 }
 
+.active {
+    background-color: springgreen;
+}
+
 .messages-wrapper {
     background-color: #fff;
     border: 2px solid black;
