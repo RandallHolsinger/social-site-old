@@ -1,84 +1,78 @@
 import React, {Component} from 'react';
+import "./Message.css";
 import axios from 'axios';
-import Header from '../Header/Header';
-import './Message.css';
 
 class Message extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            user: {},
-            friend: {},
-            friendMessages: [],
-            messageInput: ''
+            messageReplies: [],
+            replyInput: '',
+            showReplies: false
         }
-
-        this.handleMessageInput = this.handleMessageInput.bind(this)
     }
 
     componentDidMount() {
-         this.getUser()
-         this.getFriend()
-         console.log(this.state.friend)
+      this.getMessageReplies()
     }
 
-    getFriend = () => {
-        axios.get(`/api/friend/${this.props.match.params.user_id}`).then(res => {
-            this.setState({
-                friend: res.data[0]
-            })
-            console.log(this.props)
-        })
-    }
-
-    getUser = () => {
-        axios.get('/api/user/profile').then(res => {
-            this.setState({
-                user: res.data[0]
-            })
-        })
-    }
-
-    sendMessage = (id) => {
-        const {messageInput} = this.state
-        axios.post(`/api/sendMessage`, {messageInput, id}).then(() => {
-            alert('Message has been sent sucessfuly!')
-        })
-    }
-    
-    handleMessageInput(e) {
+    handleReply = (e) => {
         this.setState({
-            messageInput: e.target.value
+            replyInput: e.target.value
         })
     }
 
+    getMessageReplies = () => {
+        axios.get(`/api/message/${this.props.messageId}`).then(res => {
+            this.setState({
+                messageReplies: res.data
+            })
+        })
+    }
+
+    toggleShowReplies = () => {
+        this.setState({
+            showReplies: !this.state.showReplies
+        })
+    }
+
+    sendReply = () => {
+       const {replyInput} = this.state
+       let {messageId} = this.props
+       axios.post(`/api/message/reply`, {replyInput, messageId}).then(() => {
+           this.getMessageReplies()
+           alert('reply added')
+       })
+    }
 
 
     render() {
-        const {user, friend} = this.state
-        return (
+
+        let mappedMessageReplies = this.state.messageReplies.map(reply => {
+            return (
+                <div key={reply.messages_id} className='reply-wrapper'>
+                   <img src={reply.profile_img} alt='profile' style={{width:'20px', height:'20px'}}/>
+                   <p>{reply.username}</p>
+                   <p>{reply.reply}</p>
+                </div>
+            )
+        }) 
+        return(
             <div className='Message'>
-            <Header />
-            <h1 style={{color:'white'}}>Personal User</h1>
-             <div className='personal-user-wrapper'>
-               <img src={user.profile_img} alt='profile' style={{width: '100px', borderRadius: '100%'}}/>
-               <p>{user.username}</p>
-               <p>About Me:</p>
-               <p>{user.about_me}</p>
-             </div>
-             <div className='friend-user-wrapper'>
-               <h1 style={{color: 'white'}}>Friend:</h1>
-               <img src={friend.profile_img} alt='profile' style={{width: '100px', borderRadius: '100%'}}/>
-               <p style={{color: 'white'}}>{friend.username}</p>
-             </div>
-              <input 
-                onChange={this.handleMessageInput}
-                className='message-input'
-              />
-         
-            <button onClick={() => this.sendMessage(friend.friend_id)}>Send</button>
-              
+            <i onClick={() => this.toggleShowReplies()} className="fas fa-reply"></i>
+            {this.state.showReplies ?
+              <div>
+                  <input 
+                    onChange={this.handleReply}
+                    value={this.state.replyInput}
+                    type='text'
+                    placeholder='Write a reply'
+                  />
+                  <button onClick={() => this.sendReply()}>Reply</button>
+                  {mappedMessageReplies}
+              </div> : null
+            }
             </div>
         )
     }

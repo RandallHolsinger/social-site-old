@@ -53,5 +53,10 @@ create table messages (
    date TIMESTAMP
 )
 
-insert into posts (user_id, post, image_id, likes)
-values ($1, $2, $3, 0)
+create table Message (
+  messages_id serial primary key not null,
+  user_id integer not null,
+  message_id integer not null,
+  reply text,
+  date TIMESTAMP
+ )

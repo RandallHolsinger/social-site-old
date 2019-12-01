@@ -1,8 +1,8 @@
  import React, {Component} from 'react';
  import './Messages.css'
  import axios from 'axios';
- import Header from '../Header/Header'
-
+ import Header from '../Header/Header';
+ import Message from '../Message/Message'
 
  class Messages extends Component {
      constructor(props) {
@@ -28,7 +28,6 @@
             this.setState({
                 friends: res.data
             })
-            console.log('get friends', res.data)
         })
      }
 
@@ -45,7 +44,6 @@
             this.setState({
                 messages: res.data
             })
-            console.log('all messages', res.data)
         })
      }
 
@@ -55,7 +53,6 @@
             this.setState({
                 friendMessages: res.data
             })
-            console.log('friend messages / ID', res.data, friendUserId)
         })
     }   
      
@@ -78,22 +75,23 @@
                    </div>
                     <p>Subject: {message.subject}</p>
                     <p>Message: {message.message.split('\n')[0] + ' .........'}</p>
+                    <Message messageId={message.message_id}/>
                  </div>
              )
          })
 
-         let mappedFriendMessages =  this.state.friendMessages.map(message => {
-             return (
-                <div key={message.message_id} className='messages-wrapper'>
-                <div className='user-info-messages'>
-                  <img src={message.profile_img} alt='profile' style={{width: '25px', height:'25px'}}/>
-                  <p>{message.username}</p>
-                </div>
-                 <p>Subject: {message.subject}</p>
-                 <p>Message: {message.message.split('\n')[0] + ' .........'}</p>
-              </div>
-             )
-         })
+        //  let mappedFriendMessages =  this.state.friendMessages.map(message => {
+        //      return (
+        //         <div key={message.message_id} className='messages-wrapper'>
+        //         <div className='user-info-messages'>
+        //           <img src={message.profile_img} alt='profile' style={{width: '25px', height:'25px'}}/>
+        //           <p>{message.username}</p>
+        //         </div>
+        //          <p>Subject: {message.subject}</p>
+        //          <p>Message: {message.message.split('\n')[0] + ' .........'}</p>
+        //       </div>
+        //      )
+        //  })
 
          const {user} = this.state
          return (

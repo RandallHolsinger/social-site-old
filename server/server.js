@@ -85,9 +85,13 @@ app.put('/api/friends/confirmed', ctrl.confirmFriend)
 
 app.get('/api/user/messages', ctrl.getMessages)
 
+app.get('/api/message/:message_id', ctrl.getMessageReplies)
+
 app.get('/api/friend/messages/:friendUserId', ctrl.getFriendMessages)
 
 app.post('/api/sendMessage', ctrl.sendMessage)
+
+app.post('/api/message/reply', ctrl.addReply)
 
 
 

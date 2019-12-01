@@ -222,7 +222,6 @@ module.exports = {
 
   confirmFriend: (req, res) => {
       db = req.app.get('db')
-      //issue with id whhi id being updated?->
       const {user_id} = req.body
      
       db.friends.confirm_friend([user_id]).then(() => res.sendStatus(200))
@@ -246,7 +245,7 @@ module.exports = {
   },
 
   getFriendMessages: (req,res) => {
-      const db = req.app.get('db')
+      db = req.app.get('db')
       const {user_id} = req.session.user
       const {friendUserId} = req.params
       console.log('hitting backend', friendUserId)
@@ -267,6 +266,30 @@ module.exports = {
       db.messages.send_message([user_id, id, messageInput]).then(() => res.sendStatus(200))
       .catch(err => {
           res.status(500).send({errorMessage: 'somthing went wrong sending a message'})
+          console.log(err)
+      })
+  },
+
+  getMessageReplies: (req, res) => {
+      db = req.app.get('db')
+      const {message_id} = req.params
+      console.log('hitting', req.params)
+
+      db.messages.get_message_replies([message_id]).then(replies => {
+          res.status(200).send(replies)
+      }).catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong getting message replies'})
+          console.log(err)
+      })
+  },
+  addReply: (req, res) => {
+      db = req.app.get('db')
+      const {user_id} = req.session.user
+      const {messageId, replyInput} = req.body
+
+      db.messages.add_reply_message([user_id, messageId, replyInput]).then((res.sendStatus(200)))
+      .catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong sending a reply message'})
           console.log(err)
       })
   }

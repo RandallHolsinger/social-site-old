@@ -114,12 +114,12 @@ class PersonalProfile extends Component {
             )
         })
 
-        let mappedPosts = this.state.posts.map(posts => {
+        let mappedPosts = this.state.posts.map(post => {
             return (
-                <div key={posts.post_id} className='personal-posts-wrapper'>
+                <div key={post.post_id} className='personal-posts-wrapper'>
                     <img src={user.profile_img} alt='profile' style={{width: '40px', borderRadius: '100%'}}/>
                     <p>{user.username}</p>
-                    <p>{posts.post}</p>
+                    <p>{post.post}</p>
                 </div>
             )
         })
