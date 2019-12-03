@@ -20,12 +20,12 @@
 }
 
 .messages-friends-wrapper:hover {
-    background-color: springgreen;
+    background: linear-gradient(45deg, #24ec88, #1ab841);
     transition: .2s;
 }
 
 .active {
-    background-color: springgreen;
+    background: linear-gradient(45deg, #24ec88, #1ab841);
 }
 
 .messages-wrapper {
@@ -51,7 +51,7 @@
 }
 
 .dropdown-item:hover {
-   background-color: springgreen;
+   background: linear-gradient(45deg, #24ec88, #1ab841);
    transition: .2s;
 }
 

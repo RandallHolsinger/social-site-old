@@ -32,7 +32,7 @@ massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
     console.log('You are connected to the Database')
     
-    app.listen(SERVER_PORT, ()=> console.log(`Making 💵  Money 💵  On Port: ${SERVER_PORT}`))
+    app.listen(SERVER_PORT, () => console.log(`Making 💵  Money 💵  On Port: ${SERVER_PORT}`))
 })
 
 // auth endpoints

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import './Register.css';
 import axios from 'axios';
-import {connect} from 'react-redux';
 import {updateUser, clearUser} from '../../redux/reducer';
+import Particle from '../Particle/Particle';
+import {Link} from 'react-router-dom'; 
+import {connect} from 'react-redux'
 
 class Register extends Component {
     constructor(props) {
@@ -21,7 +23,7 @@ class Register extends Component {
         }
     }
     componentDidMount() {
-        this.getUser()
+        // this.getUser()
     }
 
     register = async () => {
@@ -167,7 +169,7 @@ class Register extends Component {
           </div>
           {this.state.validUsername ?
           <p className="help is-success">This username is valid</p> :
-          <p className="help is-danger">This username is invalid</p> }
+          <p className="help is-danger">Enter a valid username</p> }
           
         </div>
 
@@ -191,7 +193,7 @@ class Register extends Component {
           </div>
           {this.state.validPassword ?
           <p className="help is-success">This password is valid</p> :
-          <p className="help is-danger">This password is invalid</p>}
+          <p className="help is-danger">Enter a valid password</p>}
         </div>
              <div className="field">
           <label className="label">Confirm Password</label>
@@ -233,14 +235,14 @@ class Register extends Component {
           </div>
           {this.state.validEmail ?
           <p className="help is-success">This email is valid</p> :
-          <p className="help is-danger">This email is invalid</p>}
+          <p className="help is-danger">Enter a valid email</p>}
         </div>
-               
-               
-               
-               
+            <div className='reg-form-btns'>
+              <p>Already Registered? Login <Link to={'/'}>Here</Link></p>
               <button className='submit-reg' onClick={() => this.register()}>Submit</button>
+            </div>
              </div>
+             <Particle />
          </div>
         )
     }

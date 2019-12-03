@@ -146,7 +146,6 @@ class PersonalProfile extends Component {
                </div>
                }
                </div>
-               <p></p>
                <h1 style={{color:'white'}}>Personal Posts</h1>
                {mappedPosts}
                <h1 style={{color:'white'}}>Friend Requests</h1>

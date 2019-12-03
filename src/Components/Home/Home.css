@@ -1,9 +1,3 @@
-body {
-    background: #35373b;
-    height: 100vh;
-    width: 100%;
-}
-
 .home-user-wrapper {
     display: flex;
     flex-direction: column;

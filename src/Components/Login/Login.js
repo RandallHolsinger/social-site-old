@@ -4,6 +4,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { updateUser, clearUser } from "../../redux/reducer";
 import Particle from '../Particle/Particle'
+import {Link} from 'react-router-dom'
 import "react-bulma-components/dist/react-bulma-components.min.css";
 
 class Login extends Component {
@@ -54,10 +55,6 @@ class Login extends Component {
     });
   }
   
-  routeRegister = () => {
-    this.props.history.push("/register");
-  };
-  
   render() {
     return (
       <div className="Login">
@@ -93,8 +90,10 @@ class Login extends Component {
             </span>
           </div>
         </div>
-        <button onClick={this.login}>Login</button>
-        <button onClick={() => this.routeRegister()}>Register</button>
+        <div className='login-form-btns'>
+          <p>Haven't Registered? Register <Link to={'/register'}>Here</Link></p>
+          <button onClick={() => this.login()} className='login-btn'>Login</button>
+        </div>
 
         </div>
         <Particle />
