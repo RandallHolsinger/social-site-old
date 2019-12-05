@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './PersonalProfile.css';
 import Header from '../Header/Header';
 import axios from 'axios';
+import Comments from '../Comments/Comments'
 
 class PersonalProfile extends Component {
     constructor(props) {
@@ -120,6 +121,7 @@ class PersonalProfile extends Component {
                     <img src={user.profile_img} alt='profile' style={{width: '40px', borderRadius: '100%'}}/>
                     <p>{user.username}</p>
                     <p>{post.post}</p>
+                    <Comments postId={post.post_id} />
                 </div>
             )
         })
