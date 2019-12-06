@@ -8,7 +8,6 @@ class Comments extends Component {
 
         this.state = {
             comments: [],
-            showComments: false,
             commentInput: ''
         }
     }
@@ -33,12 +32,6 @@ class Comments extends Component {
         })
     }
 
-    toggleShowComments = () => {
-        this.setState({
-            showComments: !this.state.showComments
-        })
-        console.log('toggling', this.state.showComments)
-    }
 
     handleCommentInput = (e) => {
         this.setState({
@@ -58,8 +51,6 @@ class Comments extends Component {
         })
         return(
             <div className='Comments'>
-                <button onClick={() => this.toggleShowComments()}><i className="far fa-comment" style={{fontSize: '25px'}} ></i></button>
-                {this.state.showComments ? 
                   <div>
                       <input 
                         onChange={this.handleCommentInput}
@@ -69,14 +60,8 @@ class Comments extends Component {
                       />
                       <button onClick={() => this.addCommentToPost()}>Post Comment</button>
                       {mappedComments}
-                  </div> : 
-                  
-                  null
-                }
-
-               
-               
-            </div>
+                  </div>
+             </div>
         )
     }
 }

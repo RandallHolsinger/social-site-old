@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './Posts.css';
 import axios from 'axios';
 import Comments from '../Comments/Comments';
+import {connect} from 'react-redux';
 
 class Posts extends Component {
     constructor(props) {
@@ -10,7 +11,8 @@ class Posts extends Component {
         this.state = {
             posts: [],
             postInput: '',
-            showAddPost: false
+            showAddPost: false,
+            ShowComments: false
         }
     }
 
@@ -33,6 +35,13 @@ class Posts extends Component {
         })
     }
 
+    deletePost = (post_id) => {
+        axios.delete(`/api/post/delete/${post_id}`).then(() => {
+            alert('post deleted')
+            this.getPosts()
+        })
+    }
+
     toggleShowPosts = () => {
         this.setState({
             showAddPost: !this.state.showAddPost
@@ -45,6 +54,13 @@ class Posts extends Component {
         })
     }
 
+    toggleShowComments = () => {
+        this.setState({
+            ShowComments: !this.state.ShowComments
+        })
+    }
+
+
 
     render() {
 
@@ -54,9 +70,18 @@ class Posts extends Component {
                     <img src={post.profile_img} alt='profile'/>
                     <p>{post.username}</p>
                     <p>{post.post}</p>
+                    <p>{post.user_id}</p>
+                    {this.props.user_id === post.user_id ?
+                    <div>
+                        <button onClick={() => this.deletePost(post.post_id)}>Delete</button>
+                    </div> : null
+                    }
+                    <i onClick={() => this.toggleShowComments()}className ='fas fa-comment'></i>
+                    {this.state.ShowComments ?
                     <div className='comments-wrapper'>
-                      <Comments postId={post.post_id} />
-                    </div>
+                       <Comments postId={post.post_id} />
+                    </div> : null
+                    }
                 </div>
             )
         })
@@ -83,4 +108,14 @@ class Posts extends Component {
     }
 }
 
-export default Posts
+const mapStateToProps = (reduxState) => {
+    return {
+        user_id: reduxState.user_id,
+    }
+}
+
+const mapDispatchToProps = {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts)

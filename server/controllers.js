@@ -95,6 +95,17 @@ module.exports = {
       })
   },
 
+  deletePost: (req, res) => {
+      db = req.app.get('db')
+      const {post_id} = req.params
+
+      db.post.delete_post([post_id]).then(res.sendStatus(200))
+      .catch(err => {
+          res.status(500).send({errorMessage: 'something went wrong deleting a post'})
+          console.log(err)
+      })
+  },
+
   getUserPosts: (req, res) => {
      db = req.app.get('db')
      const {user_id} = req.session.user

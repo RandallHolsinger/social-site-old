@@ -53,13 +53,10 @@ class Home extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
-        user_id: reduxState.user_id,
-        reduxState
+        user_id: reduxState.user_id
     }
 }
 
-const mapDispatchToProps = {
-  
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+
+export default connect(mapStateToProps)(Home)

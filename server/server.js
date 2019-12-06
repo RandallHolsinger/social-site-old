@@ -53,6 +53,8 @@ app.post('/api/addPost', ctrl.addPost)
 
 app.get('/api/post/:post_id', ctrl.getPost)
 
+app.delete('/api/post/:post_id', ctrl.deletePost)
+
 app.get('/api/user/posts', ctrl.getUserPosts)
 
 //commment endpoints
