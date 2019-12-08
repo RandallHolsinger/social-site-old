@@ -8,7 +8,8 @@ class Comments extends Component {
 
         this.state = {
             comments: [],
-            commentInput: ''
+            commentInput: '',
+            showComments: false
         }
     }
 
@@ -38,6 +39,12 @@ class Comments extends Component {
             commentInput: e.target.value
         })
     }
+
+    toggleShowComments = () => {
+        this.setState({
+            showComments: !this.state.showComments
+        })
+    }
     
     render() {
         let mappedComments =  this.state.comments.map(comment => {
@@ -51,6 +58,8 @@ class Comments extends Component {
         })
         return(
             <div className='Comments'>
+                 <i onClick={() => this.toggleShowComments()} className ='fas fa-comment'></i>
+                 {this.state.showComments ?
                   <div>
                       <input 
                         onChange={this.handleCommentInput}
@@ -60,7 +69,8 @@ class Comments extends Component {
                       />
                       <button onClick={() => this.addCommentToPost()}>Post Comment</button>
                       {mappedComments}
-                  </div>
+                  </div> : null
+                 }
              </div>
         )
     }

@@ -36,7 +36,7 @@ class Posts extends Component {
     }
 
     deletePost = (post_id) => {
-        axios.delete(`/api/post/delete/${post_id}`).then(() => {
+        axios.delete(`/api/post/${post_id}`).then(() => {
             alert('post deleted')
             this.getPosts()
         })
@@ -54,11 +54,7 @@ class Posts extends Component {
         })
     }
 
-    toggleShowComments = () => {
-        this.setState({
-            ShowComments: !this.state.ShowComments
-        })
-    }
+    
 
 
 
@@ -76,12 +72,10 @@ class Posts extends Component {
                         <button onClick={() => this.deletePost(post.post_id)}>Delete</button>
                     </div> : null
                     }
-                    <i onClick={() => this.toggleShowComments()}className ='fas fa-comment'></i>
-                    {this.state.ShowComments ?
                     <div className='comments-wrapper'>
                        <Comments postId={post.post_id} />
-                    </div> : null
-                    }
+                    </div>
+                    
                 </div>
             )
         })

@@ -99,7 +99,7 @@ module.exports = {
       db = req.app.get('db')
       const {post_id} = req.params
 
-      db.post.delete_post([post_id]).then(res.sendStatus(200))
+      db.posts.delete_post([post_id]).then(res.sendStatus(200))
       .catch(err => {
           res.status(500).send({errorMessage: 'something went wrong deleting a post'})
           console.log(err)
