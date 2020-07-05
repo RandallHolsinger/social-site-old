@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './Comments.css'
 import axios from 'axios';
+import "react-bulma-components/dist/react-bulma-components.min.css";
+import {Media, Image, Content, Button, Level, Section, Box, Textarea, Field, Control} from 'react-bulma-components/dist'
 
 class Comments extends Component {
     constructor(props) {
@@ -30,6 +32,7 @@ class Comments extends Component {
         const {commentInput} = this.state
         axios.post(`/api/comment/add`, {postId, commentInput}).then(() => {
             this.getCommentsFromPost()
+            this.clearInput()
         })
     }
 
@@ -45,11 +48,17 @@ class Comments extends Component {
             showComments: !this.state.showComments
         })
     }
+
+    clearInput = () => {
+        this.setState({
+            commentInput: ''
+        })
+    }
     
     render() {
         let mappedComments =  this.state.comments.map(comment => {
             return (
-                <div key={comment.comment_id} className='comment-wrapper'>
+                <div key={comment.comment_id}>
                    <img src={comment.profile_img} alt='profile' style={{width: '20px', height: '20px'}}/>
                    <p>{comment.username}</p>
                    <p>{comment.comment}</p>
@@ -57,17 +66,19 @@ class Comments extends Component {
             )
         })
         return(
-            <div className='Comments'>
+            <div>
                  <i onClick={() => this.toggleShowComments()} className ='fas fa-comment'></i>
                  {this.state.showComments ?
                   <div>
-                      <input 
-                        onChange={this.handleCommentInput}
-                        value={this.state.commentInput}
-                        type='text'
-                        placeholder='Write a comment...'
-                      />
-                      <button onClick={() => this.addCommentToPost()}>Post Comment</button>
+                      <form onSubmit={this.addCommentToPost} className='comment-form'>
+                        <input 
+                          onChange={this.handleCommentInput}
+                          value={this.state.commentInput}
+                          type='text'
+                          placeholder='Write a comment...'
+                        />
+                        <button type='submit'>Post Comment</button>
+                      </form>
                       {mappedComments}
                   </div> : null
                  }
