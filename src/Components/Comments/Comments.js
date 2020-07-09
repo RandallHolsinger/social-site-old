@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './Comments.css'
 import axios from 'axios';
 import "react-bulma-components/dist/react-bulma-components.min.css";
-import {Media, Image, Content, Button, Level, Section, Box, Textarea, Field, Control} from 'react-bulma-components/dist'
+
 
 class Comments extends Component {
     constructor(props) {
